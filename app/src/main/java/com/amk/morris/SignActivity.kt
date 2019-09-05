@@ -2,10 +2,8 @@ package com.amk.morris
 
 import android.Manifest
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -48,7 +46,7 @@ class SignActivity : AppCompatActivity() {
             alert.show()
         }
         //TODO: Send info's to the server and get callback
-        val toMain = Intent(this, MainActivity::class.java)
+        val toMain = Intent(this, ProfileActivity::class.java)
         startActivity(toMain)
 
     }

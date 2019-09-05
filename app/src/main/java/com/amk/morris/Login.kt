@@ -43,7 +43,7 @@ class Login : AppCompatActivity() {
             }
         } else {
             //TODO: Send info's to server and get callback
-            val toMain = Intent(this, MainActivity::class.java)
+            val toMain = Intent(this, ProfileActivity::class.java)
             startActivity(toMain)
         }
     }
