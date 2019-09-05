@@ -19,10 +19,10 @@ class SignActivity : AppCompatActivity() {
 
     private val galleryReqCode: Int = 100
     private val permissionCode: Int = 101
-    private lateinit var profileImage: ImageView
-    private lateinit var email_txt: EditText
-    private lateinit var pass_txt: EditText
-    private lateinit var name_txt: EditText
+    private var profileImage: ImageView? = null
+    private var email_txt: EditText? = null
+    private var pass_txt: EditText? = null
+    private var name_txt: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +36,10 @@ class SignActivity : AppCompatActivity() {
     }
 
     fun onSubmit(view: View) {
-        val email = email_txt.text.toString()
-        val name = name_txt.text.toString()
-        val pass = pass_txt.text.toString()
-        if (email.isEmpty() || name.isEmpty() || pass.isEmpty()){
+        val email = email_txt?.text.toString()
+        val name = name_txt?.text.toString()
+        val pass = pass_txt?.text.toString()
+        if (email.isEmpty() || name.isEmpty() || pass.isEmpty()) {
             val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
             alert.titleText = "ارور!"
             alert.contentText = "همه فیلدها را پر کنید"
@@ -48,7 +48,7 @@ class SignActivity : AppCompatActivity() {
         //TODO: Send info's to the server and get callback
         val toMain = Intent(this, ProfileActivity::class.java)
         startActivity(toMain)
-
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

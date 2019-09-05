@@ -41,6 +41,7 @@ public class Util extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
+        finish();
     }
 
     public Typeface getFont(AssetManager assetManager, String path) {
