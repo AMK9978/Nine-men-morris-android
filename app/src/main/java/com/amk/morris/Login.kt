@@ -38,7 +38,7 @@ class Login : AppCompatActivity() {
             run {
                 val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                 alert.titleText = "ارور!"
-                alert.contentText = "ایمیل یا رمز عبور خود را وارد کنید"
+                alert.contentText = "نام کاربری و رمز عبور خود را وارد کنید"
                 alert.show()
             }
         } else {

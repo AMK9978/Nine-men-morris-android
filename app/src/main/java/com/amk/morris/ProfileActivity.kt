@@ -1,5 +1,6 @@
 package com.amk.morris
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -13,6 +14,8 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.View
+import android.widget.ImageView
 
 class ProfileActivity : AppCompatActivity() {
 
