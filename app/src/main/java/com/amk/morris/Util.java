@@ -27,7 +27,6 @@ public class Util extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
         String PREF_NAME = "pref";
         sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         typeface1 = getFont(getAssets(), "fonts/AGhasem.ttf");
@@ -40,7 +39,7 @@ public class Util extends AppCompatActivity {
         iranSans_ultra_light = getFont(getAssets(), "fonts/iran_sans_ultra_light.ttf");
         iranSans_bold = getFont(getAssets(), "fonts/iran_sans_bold.ttf");
         FirebaseApp.initializeApp(this);
-        Intent intent = new Intent(this, Splash.class);
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
 
