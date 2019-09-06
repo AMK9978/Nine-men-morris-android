@@ -1,13 +1,13 @@
-package com.amk.morris.ui.share
+package com.amk.morris.ui.history
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class HistoryViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is share Fragment"
+        value = "This is send Fragment"
     }
     val text: LiveData<String> = _text
 }

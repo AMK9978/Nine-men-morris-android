@@ -1,4 +1,4 @@
-package com.amk.morris.ui.slideshow
+package com.amk.morris.ui.edit
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amk.morris.R
 
-class SlideshowFragment : Fragment() {
+class EditFragment : Fragment() {
 
-    private lateinit var slideshowViewModel: SlideshowViewModel
+    private lateinit var editViewModel: EditViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
+        editViewModel =
+                ViewModelProviders.of(this).get(EditViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_edit, container, false)
         val textView: TextView = root.findViewById(R.id.text_slideshow)
-        slideshowViewModel.text.observe(this, Observer {
+        editViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

@@ -1,4 +1,4 @@
-package com.amk.morris.ui.gallery
+package com.amk.morris.ui.contact_us
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amk.morris.R
 
-class GalleryFragment : Fragment() {
+class ContactFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var contactViewModel: ContactViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(this, Observer {
+        contactViewModel =
+                ViewModelProviders.of(this).get(ContactViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_contact, container, false)
+        val textView: TextView = root.findViewById(R.id.text_tools)
+        contactViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

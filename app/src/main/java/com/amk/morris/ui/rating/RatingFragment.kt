@@ -1,4 +1,4 @@
-package com.amk.morris.ui.share
+package com.amk.morris.ui.rating
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,21 +10,21 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amk.morris.R
 
-class ShareFragment : Fragment() {
+class RatingFragment : Fragment() {
 
-    private lateinit var shareViewModel: ShareViewModel
+    private lateinit var ratingViewModel: RatingViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        shareViewModel =
-                ViewModelProviders.of(this).get(ShareViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_share, container, false)
-        val textView: TextView = root.findViewById(R.id.text_share)
-        shareViewModel.text.observe(this, Observer {
-            textView.text = it
+        ratingViewModel =
+                ViewModelProviders.of(this).get(RatingViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_rating, container, false)
+//        val textView: TextView = root.findViewById(R.id.)
+        ratingViewModel.text.observe(this, Observer {
+//            textView.text = it
         })
         return root
     }

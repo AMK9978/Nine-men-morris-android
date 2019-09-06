@@ -1,4 +1,4 @@
-package com.amk.morris.ui.send
+package com.amk.morris.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amk.morris.R
 
-class SendFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
-    private lateinit var sendViewModel: SendViewModel
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        sendViewModel =
-                ViewModelProviders.of(this).get(SendViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_send, container, false)
-        val textView: TextView = root.findViewById(R.id.text_send)
-        sendViewModel.text.observe(this, Observer {
+        settingsViewModel =
+                ViewModelProviders.of(this).get(SettingsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_settings, container, false)
+        val textView: TextView = root.findViewById(R.id.text_share)
+        settingsViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

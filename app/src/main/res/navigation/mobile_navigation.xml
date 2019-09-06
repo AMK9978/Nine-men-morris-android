@@ -12,32 +12,32 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.amk.morris.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_rating"
+        android:name="com.amk.morris.ui.rating.RatingFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_rating" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.amk.morris.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_edit"
+        android:name="com.amk.morris.ui.edit.EditFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_edit" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.amk.morris.ui.tools.ToolsFragment"
+        android:id="@+id/nav_contact"
+        android:name="com.amk.morris.ui.contact_us.ContactFragment"
         android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_contact" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.amk.morris.ui.share.ShareFragment"
+        android:id="@+id/nav_settings"
+        android:name="com.amk.morris.ui.settings.SettingsFragment"
         android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.amk.morris.ui.send.SendFragment"
+        android:id="@+id/nav_history"
+        android:name="com.amk.morris.ui.history.HistoryFragment"
         android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        tools:layout="@layout/fragment_history" />
 </navigation>

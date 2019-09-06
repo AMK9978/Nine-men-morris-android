@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="end"
+            android:background="@color/colorPrimaryDark"
+            android:layout_weight="0.25">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="start"
+                    android:onClick="onProfileImage"
+                    android:src="@drawable/ic_person_outline_black_24dp"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="4dp"
+                    app:civ_circle_background_color="@color/colorAccent" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:gravity="end"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/iran_sans_bold"
+                android:textSize="24sp"
+                android:padding="16dp"
+                android:text="امیرمحمد کریمی"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/analogous_sec"
+                android:fontFamily="@font/iran_sans_bold"
+                android:textSize="24sp"
+                android:padding="16dp"
+                android:text="رتبه شما: ۷"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+</LinearLayout>

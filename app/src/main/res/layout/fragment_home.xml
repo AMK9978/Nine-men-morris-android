@@ -55,58 +55,62 @@
             android:layout_height="0dp">
 
             <Button
+                android:id="@+id/play_request"
                 android:layout_width="match_parent"
-                android:text="درخواست بازی"
-                android:textSize="20sp"
-                android:layout_weight="1"
-                android:drawableTop="@drawable/icons8_battle_50"
-                android:fontFamily="@font/iran_sans_fanum"
-                android:textColor="@color/white"
-                android:drawableTint="@color/white"
-                android:background="@drawable/home_icons_bg"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_height="match_parent"/>
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_icons_bg"
+                android:drawableTop="@drawable/icons8_battle_50"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/iran_sans_fanum"
+                android:padding="8dp"
+                android:text="درخواست بازی"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
+
             <Button
+                android:id="@+id/edit_btn"
                 android:layout_width="match_parent"
-                android:text="ویرایش"
-                android:textSize="18sp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:layout_weight="1"
+                android:background="@drawable/home_icons_bg"
                 android:drawableTop="@drawable/ic_edit_black_24dp"
                 android:fontFamily="@font/iran_sans_fanum"
-                android:textColor="@color/white"
-                android:background="@drawable/home_icons_bg"
                 android:padding="8dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_height="match_parent"/>
+                android:text="ویرایش"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <Button
+                android:id="@+id/rating_btn"
                 android:layout_width="match_parent"
-                android:text="ریتینگ"
-                android:textSize="18sp"
-                android:layout_weight="1"
-                android:fontFamily="@font/iran_sans_fanum"
-                android:textColor="@color/white"
-                android:drawableTop="@drawable/ic_show_chart_black_24dp"
-                android:background="@drawable/home_icons_bg"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_height="match_parent"/>
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_icons_bg"
+                android:drawableTop="@drawable/ic_show_chart_black_24dp"
+                android:fontFamily="@font/iran_sans_fanum"
+                android:padding="8dp"
+                android:text="ریتینگ"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -115,47 +119,51 @@
             android:layout_height="0dp">
 
             <Button
+                android:id="@+id/history_btn"
                 android:layout_width="match_parent"
-                android:text="تاریخچه"
-                android:textSize="18sp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:drawableTop="@drawable/ic_history_black_24dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/iran_sans_fanum"
-                android:textColor="@color/white"
-                android:background="@drawable/home_icons_bg"
-                android:padding="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_height="match_parent"/>
-            <Button
-                android:layout_width="match_parent"
-                android:text="تنظیمات"
-                android:textSize="18sp"
-                android:layout_marginBottom="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:layout_weight="1"
+                android:background="@drawable/home_icons_bg"
+                android:drawableTop="@drawable/ic_history_black_24dp"
+                android:fontFamily="@font/iran_sans_fanum"
+                android:padding="8dp"
+                android:text="تاریخچه"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/settings_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/home_icons_bg"
                 android:drawableTop="@drawable/ic_settings_black_24dp"
                 android:fontFamily="@font/iran_sans_fanum"
-                android:textColor="@color/white"
-                android:background="@drawable/home_icons_bg"
                 android:padding="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_height="match_parent"/>
+                android:text="تنظیمات"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>
     </FrameLayout>
 
     <Button
+        android:id="@+id/logout_btn"
         android:layout_width="match_parent"
-        android:text="خروج از حساب کاربری"
-        android:textSize="18sp"
-        android:padding="16dp"
-        android:fontFamily="@font/iran_sans_fanum"
-        android:textColor="@color/white"
+        android:layout_height="wrap_content"
         android:background="@drawable/exit_bg"
-        android:layout_height="wrap_content" />
+        android:fontFamily="@font/iran_sans_fanum"
+        android:padding="16dp"
+        android:text="خروج از حساب کاربری"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 </LinearLayout>

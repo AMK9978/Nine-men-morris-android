@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:srcCompat="@mipmap/ic_icon" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_bold"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="ارتباط با موریس!"
+        android:textColor="@color/white"
+        android:textSize="32sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:fontFamily="@font/iran_sans_fanum"
+            android:paddingStart="24dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="24dp"
+            android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشت"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.25"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/telegram_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:drawableLeft="@drawable/icons8_telegram_app_48"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/iran_sans_bold"
+                android:padding="24dp"
+                android:text="کانال تلگرام : morris_farsi@"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/email_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_contact_mail_black_24dp"
+                android:fontFamily="@font/iran_sans_bold"
+                android:padding="24dp"
+                android:text="ایمیل : morrisfarsi@gmail.com"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
