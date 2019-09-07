@@ -39,12 +39,12 @@ class SignActivity : AppCompatActivity() {
         val email = email_txt?.text.toString()
         val name = name_txt?.text.toString()
         val pass = pass_txt?.text.toString()
-        if (email.isEmpty() || name.isEmpty() || pass.isEmpty()) {
-            val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-            alert.titleText = "ارور!"
-            alert.contentText = "همه فیلدها را پر کنید"
-            alert.show()
-        }
+//        if (email.isEmpty() || name.isEmpty() || pass.isEmpty()) {
+//            val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+//            alert.titleText = "ارور!"
+//            alert.contentText = "همه فیلدها را پر کنید"
+//            alert.show()
+//        }
         //TODO: Send info's to the server and get callback
         val toMain = Intent(this, ProfileActivity::class.java)
         startActivity(toMain)

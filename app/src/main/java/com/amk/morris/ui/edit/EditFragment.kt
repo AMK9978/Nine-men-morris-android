@@ -22,9 +22,9 @@ class EditFragment : Fragment() {
         editViewModel =
                 ViewModelProviders.of(this).get(EditViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_edit, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+//        val textView: TextView = root.findViewById(R.id.text_slideshow)
         editViewModel.text.observe(this, Observer {
-            textView.text = it
+//            textView.text = it
         })
         return root
     }

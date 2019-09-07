@@ -35,12 +35,12 @@ class Login : AppCompatActivity() {
         val email = email_txt.text.toString()
         val passTxt = pass_txt.text.toString()
         if (passTxt.isEmpty() || email.isEmpty()) {
-            run {
-                val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                alert.titleText = "ارور!"
-                alert.contentText = "نام کاربری و رمز عبور خود را وارد کنید"
-                alert.show()
-            }
+//            run {
+//                val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+//                alert.titleText = "ارور!"
+//                alert.contentText = "نام کاربری و رمز عبور خود را وارد کنید"
+//                alert.show()
+//            }
         } else {
             //TODO: Send info's to server and get callback
             val toMain = Intent(this, ProfileActivity::class.java)

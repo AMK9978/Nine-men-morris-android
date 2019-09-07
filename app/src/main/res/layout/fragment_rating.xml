@@ -5,70 +5,34 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="end"
-            android:background="@color/colorPrimaryDark"
-            android:layout_weight="0.25">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:orientation="vertical"
-                android:padding="8dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="start"
-                    android:onClick="onProfileImage"
-                    android:src="@drawable/ic_person_outline_black_24dp"
-                    app:civ_border_color="@color/colorPrimaryDark"
-                    app:civ_border_width="4dp"
-                    app:civ_circle_background_color="@color/colorAccent" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:orientation="vertical"
-                android:gravity="end"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:fontFamily="@font/iran_sans_bold"
-                android:textSize="24sp"
-                android:padding="16dp"
-                android:text="امیرمحمد کریمی"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/analogous_sec"
-                android:fontFamily="@font/iran_sans_bold"
-                android:textSize="24sp"
-                android:padding="16dp"
-                android:text="رتبه شما: ۷"/>
-            </LinearLayout>
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@color/analogous_sec"-->
+<!--        android:layout_height="56dp">-->
+<!--&lt;!&ndash;        <RelativeLayout&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="match_parent">&ndash;&gt;-->
+<!--&lt;!&ndash;            <Button&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                &ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            <Button&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/back_btn"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignParentEnd="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="موریس!"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_centerVertical="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@+id/back_btn"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:fontFamily="@font/iran_sans_normal"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        </RelativeLayout>&ndash;&gt;-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
+
+
 
 </LinearLayout>

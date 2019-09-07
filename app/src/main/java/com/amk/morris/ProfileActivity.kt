@@ -1,6 +1,7 @@
 package com.amk.morris
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -14,13 +15,15 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.GravityCompat
+import kotlinx.android.synthetic.main.layout_profile.*
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_profile)
@@ -32,6 +35,7 @@ class ProfileActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_home, R.id.nav_rating, R.id.nav_history,
                 R.id.nav_edit, R.id.nav_share, R.id.nav_contact), drawerLayout)
+
         navView.setupWithNavController(navController)
     }
 
@@ -44,5 +48,29 @@ class ProfileActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
+            R.id.nav_edit -> {
+
+            }
+            R.id.nav_history -> {
+
+            }
+            R.id.nav_rating -> {
+            }
+            R.id.nav_contact -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+            R.id.nav_settings -> {
+
+            }
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 }

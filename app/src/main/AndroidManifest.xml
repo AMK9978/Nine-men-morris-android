@@ -15,19 +15,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GameActivity" android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ProfileActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SendToEmail" />
-        <activity android:name=".SignActivity" />
-        <activity android:name=".Login" />
-        <activity android:name=".Splash" />
-        <activity android:name=".Util">
+        <activity android:name=".SendToEmail" android:screenOrientation="portrait" />
+        <activity android:name=".SignActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Login" android:screenOrientation="portrait"/>
+        <activity android:name=".Splash" android:screenOrientation="portrait"/>
+        <activity android:name=".Util" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

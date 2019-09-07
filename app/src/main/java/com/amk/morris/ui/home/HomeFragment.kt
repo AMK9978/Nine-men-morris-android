@@ -1,15 +1,18 @@
 package com.amk.morris.ui.home
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.amk.morris.GameActivity
 import com.amk.morris.R
 
 class HomeFragment : Fragment() {
@@ -30,7 +33,12 @@ class HomeFragment : Fragment() {
 
         val back_image = root.findViewById<ImageView>(R.id.back_image1)
         ObjectAnimator.ofFloat(back_image, View.ROTATION, 0f, 360f).setDuration(30000).start()
-
+        val play_req = root.findViewById<Button>(R.id.play_request)
+        play_req.setOnClickListener{
+            val goto = Intent(this.context,GameActivity::class.java)
+            startActivity(goto)
+        }
         return root
     }
+
 }
