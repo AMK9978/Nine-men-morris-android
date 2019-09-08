@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -9,8 +10,8 @@
 
     <ImageView
         android:id="@+id/back_image"
-        android:layout_width="409dp"
-        android:layout_height="632dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="32dp"
         android:alpha="0.5"
         android:rotation="45"
@@ -20,121 +21,131 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/board_grid" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layoutDirection="ltr"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:layout_marginTop="24dp">
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    app:srcCompat="@android:drawable/sym_def_app_icon" />
-            </RelativeLayout>
-
-            <EditText
-                android:id="@+id/email_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:background="@drawable/txt_back"
-                android:drawableLeft="@drawable/ic_person_outline_black_24dp"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/iran_sans_fanum"
-                android:hint="نام کاربری:"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:inputType="textPersonName"
                 android:layoutDirection="ltr"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="22sp" />
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/pass_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layoutDirection="ltr"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/txt_back"
-                android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/iran_sans_fanum"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:hint="رمز عبور:"
-                android:inputType="textVisiblePassword"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="22sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="24dp"
+                    android:layout_marginTop="24dp">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        android:focusableInTouchMode="true"
+                        app:srcCompat="@android:drawable/sym_def_app_icon" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/email_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="24dp"
+                    android:background="@drawable/txt_back"
+                    android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/iran_sans_fanum"
+                    android:hint="نام کاربری:"
+                    android:inputType="textPersonName"
+                    android:layoutDirection="ltr"
+                    android:padding="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/pass_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/txt_back"
+                    android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/iran_sans_fanum"
+                    android:hint="رمز عبور:"
+                    android:inputType="textVisiblePassword"
+                    android:layoutDirection="ltr"
+                    android:padding="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="22sp" />
 
 
-            <TextView
-                android:id="@+id/forgot_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:fontFamily="@font/iran_sans_bold"
-                android:gravity="end"
-                android:onClick="onForgotTxt"
-                android:padding="16dp"
-                android:layoutDirection="ltr"
-                android:text="رمزم را فراموش کرده ام"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/forgot_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:gravity="end"
+                    android:layoutDirection="ltr"
+                    android:onClick="onForgotTxt"
+                    android:padding="16dp"
+                    android:text="رمزم را فراموش کرده ام"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/submit_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginStart="32dp"
-                android:background="@drawable/submit_bg"
-                android:fontFamily="@font/iran_sans_bold"
-                android:onClick="onSubmit"
-                android:padding="16dp"
-                android:text="ورود"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
+                <Button
+                    android:id="@+id/submit_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/submit_bg"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:onClick="onSubmit"
+                    android:padding="16dp"
+                    android:text="ورود"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/sign_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/iran_sans_bold"
-                android:gravity="center"
-                android:onClick="onSignTxt"
-                android:padding="16dp"
-                android:layoutDirection="ltr"
-                android:layout_marginBottom="16dp"
-                android:text="حساب نداری؟   ثبت نام کن"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/sign_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/silver_bg"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layoutDirection="ltr"
+                    android:onClick="onSignTxt"
+                    android:padding="16dp"
+                    android:text="حساب نداری؟   ثبت نام کن"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

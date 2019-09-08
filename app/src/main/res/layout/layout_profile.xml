@@ -14,12 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/nav_view2"
         android:layout_width="wrap_content"
         android:layoutDirection="ltr"
         android:layout_height="match_parent"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_profile"
         app:menu="@menu/layout_profile_drawer" />

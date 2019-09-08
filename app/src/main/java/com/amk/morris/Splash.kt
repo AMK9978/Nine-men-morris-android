@@ -1,8 +1,7 @@
 package com.amk.morris
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 
 class Splash : AppCompatActivity() {
 

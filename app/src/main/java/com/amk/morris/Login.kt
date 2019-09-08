@@ -2,11 +2,11 @@ package com.amk.morris
 
 import android.animation.ObjectAnimator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 
 
@@ -35,12 +35,16 @@ class Login : AppCompatActivity() {
         val email = email_txt.text.toString()
         val passTxt = pass_txt.text.toString()
         if (passTxt.isEmpty() || email.isEmpty()) {
-//            run {
-//                val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-//                alert.titleText = "ارور!"
-//                alert.contentText = "نام کاربری و رمز عبور خود را وارد کنید"
-//                alert.show()
-//            }
+            run {
+                val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                alert.titleText = "مشکل!"
+                alert.contentText = "نام کاربری و رمز عبور خود را وارد کنید"
+                alert.setConfirmText("باشه")
+                alert.show()
+                alert.setConfirmClickListener {
+                    alert.dismiss()
+                }
+            }
         } else {
             //TODO: Send info's to server and get callback
             val toMain = Intent(this, ProfileActivity::class.java)

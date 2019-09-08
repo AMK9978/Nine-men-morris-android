@@ -13,6 +13,8 @@
     <color name="purple">#8001FF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000</color>
+    <color name="green_success">#4BB543</color>
+    <color name="red_fail">#FC100D</color>
     <color name="blue_light">#00d2ff</color>
     <color name="blue_dark">#3a7bd5</color>
     <color name="triangle">#f29882</color>

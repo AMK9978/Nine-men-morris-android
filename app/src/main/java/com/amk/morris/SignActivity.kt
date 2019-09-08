@@ -2,18 +2,27 @@ package com.amk.morris
 
 import android.Manifest
 import android.animation.ObjectAnimator
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.squareup.picasso.Picasso
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Environment
+import java.io.*
+
 
 class SignActivity : AppCompatActivity() {
 
@@ -32,30 +41,48 @@ class SignActivity : AppCompatActivity() {
         pass_txt = findViewById(R.id.username_txt)
         profileImage = findViewById(R.id.profile_image)
         val background_image = findViewById<ImageView>(R.id.imageView4)
-        ObjectAnimator.ofFloat(background_image, View.ROTATION, 0f, 360f).setDuration(30000).start()
+        ObjectAnimator.ofFloat(background_image, View.ROTATION, 0f, 360f).setDuration(60000).start()
     }
 
     fun onSubmit(view: View) {
         val email = email_txt?.text.toString()
         val name = name_txt?.text.toString()
         val pass = pass_txt?.text.toString()
-//        if (email.isEmpty() || name.isEmpty() || pass.isEmpty()) {
-//            val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-//            alert.titleText = "ارور!"
-//            alert.contentText = "همه فیلدها را پر کنید"
-//            alert.show()
-//        }
-        //TODO: Send info's to the server and get callback
-        val toMain = Intent(this, ProfileActivity::class.java)
-        startActivity(toMain)
-        finish()
+        if (email.isEmpty() || name.isEmpty() || pass.isEmpty()) {
+            val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            alert.titleText = "مشکل!"
+            alert.contentText = "همه فیلدها را پر کنید"
+            alert.show()
+            alert.setConfirmClickListener {
+                alert.dismiss()
+            }
+        } else {
+            //TODO: Send info's to the server and get callback
+            saveImageToInternalStorage(profileImage!!.drawable)
+            val toMain = Intent(this, ProfileActivity::class.java)
+            startActivity(toMain)
+            finish()
+        }
+    }
+
+    private fun saveImageToInternalStorage(drawable: Drawable) {
+        val bitmap = (drawable as BitmapDrawable).bitmap
+        val mainFile = "Morris"
+        val f = File(Environment.getExternalStorageDirectory(), mainFile)
+        if (!f.exists()) {
+            f.mkdirs()
+        }
+        val mypath = "profileImage.jpg"
+        val mypathfile = File(f.absolutePath + "/" + mypath)
+        val fos = FileOutputStream(mypathfile)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100) {
             Log.i("TAG", data?.data.toString())
-            Picasso.get().load(data?.data).fit().into(profileImage)
+            Picasso.get().load(data?.data).fit().placeholder(R.drawable.ic_person_outline_black_24dp).into(profileImage)
         }
     }
 

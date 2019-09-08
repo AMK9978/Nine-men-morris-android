@@ -1,12 +1,12 @@
 package com.amk.morris;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
 
@@ -27,8 +27,7 @@ public class Util extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String PREF_NAME = "pref";
-        sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
         typeface1 = getFont(getAssets(), "fonts/AGhasem.ttf");
         iranSans = getFont(getAssets(), "fonts/iransans.ttf");
         iranSans_fanum = getFont(getAssets(), "fonts/iran_sans_fanum.ttf");

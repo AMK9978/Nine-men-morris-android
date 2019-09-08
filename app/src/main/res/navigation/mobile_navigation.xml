@@ -40,4 +40,7 @@
         android:name="com.amk.morris.ui.history.HistoryFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_history" />
+
+
+
 </navigation>

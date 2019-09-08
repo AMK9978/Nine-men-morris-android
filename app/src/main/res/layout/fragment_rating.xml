@@ -2,37 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="56dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:layoutDirection="rtl"
+        android:background="@color/colorPrimaryDark">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:background="@color/analogous_sec"-->
-<!--        android:layout_height="56dp">-->
-<!--&lt;!&ndash;        <RelativeLayout&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="match_parent">&ndash;&gt;-->
-<!--&lt;!&ndash;            <Button&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                &ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"/>&ndash;&gt;-->
-<!--&lt;!&ndash;            <Button&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/back_btn"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_alignParentEnd="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"/>&ndash;&gt;-->
-<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:text="موریس!"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_centerVertical="true"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_alignStart="@+id/back_btn"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:fontFamily="@font/iran_sans_normal"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        </RelativeLayout>&ndash;&gt;-->
-<!--    </androidx.appcompat.widget.Toolbar>-->
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:rotation="180"
+            app:srcCompat="@drawable/baseline_arrow_back_white_18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:text="رتبه بندی"
+            android:gravity="center"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:fontFamily="@font/iran_sans_bold"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@drawable/baseline_search_white_18dp" />
+    </LinearLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rating_recycler"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
