@@ -1,7 +1,7 @@
 package com.amk.morris.Model;
 
 public class Person {
-    private int id, rating, rank;
+    private int id, score, rank;
     private String name,file_path,email;
 
     public Person(String name) {
@@ -16,12 +16,12 @@ public class Person {
         this.id = id;
     }
 
-    public int getRating() {
-        return rating;
+    public int getScore() {
+        return score;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public int getRank() {

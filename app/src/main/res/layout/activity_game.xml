@@ -36,6 +36,7 @@
                     app:civ_circle_background_color="@color/colorAccent" />
 
                 <TextView
+                    android:id="@+id/self_name"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/iran_sans_medium"
@@ -50,6 +51,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/opponent_name"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/iran_sans_medium"
@@ -69,6 +71,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/hint_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -84,8 +87,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -107,8 +108,8 @@
 
             <ImageView
                 android:id="@+id/button"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -121,8 +122,8 @@
 
             <ImageView
                 android:id="@+id/button4"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -136,8 +137,8 @@
 
             <ImageView
                 android:id="@+id/button3"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -151,8 +152,8 @@
 
             <ImageView
                 android:id="@+id/button26"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -166,8 +167,8 @@
 
             <ImageView
                 android:id="@+id/button30"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -181,8 +182,8 @@
 
             <ImageView
                 android:id="@+id/button31"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -195,8 +196,8 @@
 
             <ImageView
                 android:id="@+id/button32"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -210,8 +211,8 @@
 
             <ImageView
                 android:id="@+id/button33"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -225,8 +226,8 @@
 
             <ImageView
                 android:id="@+id/button34"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -239,8 +240,8 @@
 
             <ImageView
                 android:id="@+id/button35"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -253,8 +254,8 @@
 
             <ImageView
                 android:id="@+id/button36"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -267,8 +268,8 @@
 
             <ImageView
                 android:id="@+id/button37"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -280,8 +281,8 @@
 
             <ImageView
                 android:id="@+id/button38"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -293,8 +294,8 @@
 
             <ImageView
                 android:id="@+id/button39"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -307,8 +308,8 @@
 
             <ImageView
                 android:id="@+id/button5"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:background="@drawable/whitemohre_min"
@@ -322,8 +323,8 @@
 
             <ImageView
                 android:id="@+id/button25"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -337,8 +338,8 @@
 
             <ImageView
                 android:id="@+id/button29"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -351,8 +352,8 @@
 
             <ImageView
                 android:id="@+id/button27"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:background="@drawable/whitemohre_min"
                 android:layout_alignTop="@+id/imageView"
@@ -366,8 +367,8 @@
 
             <ImageView
                 android:id="@+id/button28"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -380,8 +381,8 @@
 
             <ImageView
                 android:id="@+id/button6"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -394,8 +395,8 @@
 
             <ImageView
                 android:id="@+id/button7"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:background="@drawable/whitemohre_min"
@@ -409,8 +410,8 @@
 
             <ImageView
                 android:id="@+id/button9"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:background="@drawable/blackmohre_min"
@@ -424,8 +425,8 @@
 
             <ImageView
                 android:id="@+id/button23"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"
@@ -438,8 +439,8 @@
 
             <ImageView
                 android:id="@+id/button24"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_alignBottom="@+id/imageView"

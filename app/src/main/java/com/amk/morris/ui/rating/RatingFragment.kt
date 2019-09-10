@@ -30,7 +30,7 @@ class RatingFragment : Fragment() {
         ratingViewModel.text.observe(this, Observer {
 //            textView.text = it
         })
-        val backBtn = root.findViewById<ImageView>(R.id.back_image)
+        val backBtn = root.findViewById<ImageView>(R.id.back_btn)
         backBtn.setOnClickListener {
             fragmentManager?.popBackStack()
         }
@@ -48,6 +48,7 @@ class RatingFragment : Fragment() {
         person2.id = 2
 
         persons.add(person)
+        persons.add(person2)
         val ratingAdapter = RatingAdapter(persons, context)
         ratingRecycler.adapter = ratingAdapter
         ratingRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

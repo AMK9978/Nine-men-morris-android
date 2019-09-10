@@ -44,6 +44,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //Better implementation:
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.google.dagger:dagger:2.15'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+    implementation 'com.google.dagger:dagger-android:2.15'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2'
     //design:
     implementation 'com.github.AppIntro:AppIntro:4.2.3'
     implementation 'com.github.f0ris.sweetalert:library:1.5.6'
@@ -55,6 +61,7 @@ dependencies {
     implementation 'devlight.io:navigationtabbar:1.2.5'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    implementation 'com.github.angads25:toggle:1.1.0'
     implementation 'com.sackcentury:shinebutton:1.0.0'
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'

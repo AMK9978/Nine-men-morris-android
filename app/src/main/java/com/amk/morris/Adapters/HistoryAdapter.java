@@ -42,9 +42,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Item> {
         HistoryModel historyModel = historyModels.get(position);
         Person self = historyModel.getSelf();
         Person opponent = historyModel.getOpponent();
-        holder.self_rating.setText(String.valueOf(self.getRating()));
+        holder.self_rating.setText(String.valueOf(self.getScore()));
         holder.self_name.setText(self.getName());
-        holder.opponent_rating.setText(String.valueOf(opponent.getRating()));
+        holder.opponent_rating.setText(String.valueOf(opponent.getScore()));
         holder.opponent_name.setText(opponent.getName());
         holder.status.setText(historyModel.getStatus());
         holder.date.setText(historyModel.getDate());

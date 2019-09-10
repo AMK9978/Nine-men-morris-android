@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:paddingBottom="8dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:fontFamily="@font/iran_sans_fanum"
+        android:textSize="18sp"
+        android:text="نوع بازی را مشخص کن:"
+        android:gravity="center"
+        android:padding="8dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/online_game"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/option_object_back"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/iran_sans_fanum"
+            android:textSize="18sp"
+            android:drawablePadding="16dp"
+            android:drawableLeft="@drawable/ic_group_black_24dp"
+            android:text="رقابت آنلاین!"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/ai_game"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/option_object_back"
+            android:layout_height="wrap_content"
+            android:drawableTint="@color/white"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/iran_sans_fanum"
+            android:textSize="18sp"
+            android:drawablePadding="16dp"
+            android:drawableLeft="@drawable/robot"
+            android:text="رقابت با هوش مصنوعی!"
+            android:padding="8dp"/>
+        <TextView
+            android:id="@+id/self_game"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/option_object_back"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/iran_sans_fanum"
+            android:textSize="18sp"
+            android:drawablePadding="16dp"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:text="رقابت خود!"
+            android:padding="8dp"/>
+        </LinearLayout>
+</LinearLayout>

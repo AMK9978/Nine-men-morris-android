@@ -50,7 +50,7 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> {
     public void onBindViewHolder(@NonNull Item holder, int position) {
         Person person = personArrayList.get(position);
         holder.name.setText(person.getName());
-        holder.selfRating.setText(person.getRating());
+        holder.selfRating.setText(String.valueOf(person.getScore()));
         if (person.getId() == MyID){
             holder.ratingBack.setBackground(context.getResources().getDrawable(R.drawable.rating_me_object_back));
         }else{
