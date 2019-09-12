@@ -26,7 +26,6 @@ import com.amk.morris.ui.rating.RatingFragment
 import com.amk.morris.ui.settings.SettingsFragment
 import com.squareup.picasso.Picasso
 import java.io.File
-import kotlin.concurrent.thread
 
 class HomeFragment : Fragment() {
 
@@ -56,6 +55,7 @@ class HomeFragment : Fragment() {
             val onlineGame = dialog?.findViewById<TextView>(R.id.online_game)
             val aiGame = dialog?.findViewById<TextView>(R.id.ai_game)
             val selfGame = dialog?.findViewById<TextView>(R.id.self_game)
+            val selfName = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "من!") as String
             onlineGame?.setOnClickListener {
                 dialog.dismiss()
                 val dialog2 = context?.let { it1 -> Dialog(it1) }
@@ -69,19 +69,23 @@ class HomeFragment : Fragment() {
                 dialog2?.dismiss()
                 val goto = Intent(this.context, GameActivity::class.java)
                 goto.putExtra("type", "online")
+                goto.putExtra("selfName", selfName)
                 startActivity(goto)
             }
             aiGame?.setOnClickListener {
                 dialog.dismiss()
-                val goto = Intent(this.context, GameActivity::class.java)
+                val goto = Intent(activity, GameActivity::class.java)
                 goto.putExtra("type", "ai")
+                goto.putExtra("selfName", selfName)
                 startActivity(goto)
             }
 
             selfGame?.setOnClickListener {
                 dialog.dismiss()
-                val goto = Intent(this.context, GameActivity::class.java)
+                val goto = Intent(activity, GameActivity::class.java)
                 goto.putExtra("type", "self")
+                goto.putExtra("selfName", selfName)
+                goto.putExtra("oppName", selfName)
                 startActivity(goto)
             }
 

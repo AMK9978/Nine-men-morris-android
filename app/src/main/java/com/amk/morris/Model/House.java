@@ -45,6 +45,7 @@ public class House {
 
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
+        this.imageView.setImageDrawable(drawable);
     }
 
     public ImageView getImageView() {

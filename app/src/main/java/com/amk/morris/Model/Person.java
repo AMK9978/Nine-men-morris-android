@@ -1,6 +1,8 @@
 package com.amk.morris.Model;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private int id, score, rank;
     private String name,file_path,email;
 

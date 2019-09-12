@@ -59,6 +59,8 @@ class SignActivity : AppCompatActivity() {
         } else {
             //TODO: Send info's to the server and get callback
             saveImageToInternalStorage(profileImage!!.drawable)
+            getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putString("name", name).commit()
+            getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putString("email", email).commit()
             val toMain = Intent(this, ProfileActivity::class.java)
             startActivity(toMain)
             finish()

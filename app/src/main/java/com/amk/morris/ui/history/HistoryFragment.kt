@@ -35,8 +35,8 @@ class HistoryFragment : Fragment() {
         hmodel.date = "98/02/12"
         val self = Person("امیرمحمد کریمی")
         val opponent = Person("آرمان مظلوم زاده")
-        self.rating = 1202
-        opponent.rating = 1404
+        self.score = 1202
+        opponent.score = 1404
         hmodel.status = "برد"
         hmodel.self = self
         hmodel.opponent = opponent

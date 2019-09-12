@@ -29,6 +29,7 @@ public class Board {
             new House(21),
             new House(22),
             new House(23),
+            new House(24),
     };
 
     private Board() {

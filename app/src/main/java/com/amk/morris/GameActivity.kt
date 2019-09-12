@@ -1,10 +1,12 @@
 package com.amk.morris
 
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.amk.morris.Model.Person
 import com.amk.morris.Model.Player
 
 class GameActivity : AppCompatActivity() {
@@ -47,8 +49,24 @@ class GameActivity : AppCompatActivity() {
                 .also { hyper ->
                     findViewById<TextView>(R.id.hint_txt).startAnimation(hyper)
                 }
-        val player1 = intent.extras?.getSerializable("player1") as Player
-        val player2 = intent.extras?.getSerializable("player2") as Player
+        val selfName = intent.getStringExtra("selfName")
+        val oppName = intent.getStringExtra("oppName")
+        val type = intent.getStringExtra("type")
+
+        Log.i("TAG", "$selfName vs $oppName and $type")
+        val person1 = Person(selfName)
+        val person2 = Person(selfName)
+        val player1 = Player(applicationContext, person1, 1)
+        val player2 = Player(applicationContext, person2, 2)
+        player1.drawable = resources.getDrawable(R.drawable.whitemohre_min)
+        player1.chosen_drawable = resources.getDrawable(R.drawable.whitemohre_chosen)
+        player2.chosen_drawable = resources.getDrawable(R.drawable.blackmohre_chosen)
+        player2.drawable = resources.getDrawable(R.drawable.blackmohre_min)
+        val selfName_txt = findViewById<TextView>(R.id.self_name)
+        val oppName_txt = findViewById<TextView>(R.id.opponent_name)
+        selfName_txt.text = selfName
+        oppName_txt.text = oppName
+
         btn0 = findViewById(R.id.btn0)
         btn1 = findViewById(R.id.btn1)
         btn2 = findViewById(R.id.btn2)

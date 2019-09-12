@@ -25,7 +25,7 @@ public class GameRepository {
     private House barr2[][] = new House[3][3];
     private House home;
 
-    public GameRepository(Player player1, Player player2, Context context) {
+    public GameRepository(Player player1, Player player2) {
         this.game = new Game(player1, player2);
         this.board = game.getBoard();
         this.players = game.getPlayers();
@@ -137,43 +137,43 @@ public class GameRepository {
                 barr2 = barr[i];
                 for (int j = 0; j < 3; j++) {
                     for (int k = 0; k < 3; k++) {
-                        if (houses.get(m) == barr2[k][j]) { //processing on the a house starts
-                            ArrayList<Board> b = new ArrayList<>(); //to contain it's neighbours
-                            try {
-                                b.add(barr2[k - 1][j]);
-                            } catch (Exception e) {
-                            }
-                            try {
-                                b.add(barr2[k + 1][j]);
-                            } catch (Exception e) {
-                            }
-                            try {
-                                b.add(barr2[k][j - 1]);
-                            } catch (Exception e) {
-                            }
-                            try {
-                                b.add(barr2[k][j + 1]);
-                            } catch (Exception e) {
-                            }
-                            //Maximum of a house neighbours is 4 houses
-                            //All of it's neighbours are saved to checked
-                            for (int l = 0; l < 4; l++) {
-                                try {
-                                    if (b.get(l).isocc == false) {
-                                        //means that one house exists that's not occupied
-                                        System.out.println("current house: " + houses.get(m).index + houses.get(m).owner.name);
-                                        System.out.println("free house: " + b.get(l).index + b.get(l).owner);
-                                        return true;
-                                    }
-                                } catch (Exception e) {
-                                }
-                            }
-                            //Whene compiler becomes here means that the house finded but It had no neighbours
-                            //So it's essential to check another array of 4 array to check has any neighbour?
-                            if (turns != 1) {
-                                turns = 1;
-                            }
-                        }
+//                        if (houses.get(m) == barr2[k][j]) { //processing on the a house starts
+//                            ArrayList<Board> b = new ArrayList<>(); //to contain it's neighbours
+//                            try {
+//                                b.add(barr2[k - 1][j]);
+//                            } catch (Exception e) {
+//                            }
+//                            try {
+//                                b.add(barr2[k + 1][j]);
+//                            } catch (Exception e) {
+//                            }
+//                            try {
+//                                b.add(barr2[k][j - 1]);
+//                            } catch (Exception e) {
+//                            }
+//                            try {
+//                                b.add(barr2[k][j + 1]);
+//                            } catch (Exception e) {
+//                            }
+//                            //Maximum of a house neighbours is 4 houses
+//                            //All of it's neighbours are saved to checked
+//                            for (int l = 0; l < 4; l++) {
+//                                try {
+//                                    if (b.get(l).isocc == false) {
+//                                        //means that one house exists that's not occupied
+//                                        System.out.println("current house: " + houses.get(m).index + houses.get(m).owner.name);
+//                                        System.out.println("free house: " + b.get(l).index + b.get(l).owner);
+//                                        return true;
+//                                    }
+//                                } catch (Exception e) {
+//                                }
+//                            }
+//                            //When program becomes here means that the house found but It had no neighbours
+//                            //So it's essential to check another array of 4 array to check has any neighbour?
+//                            if (turns != 1) {
+//                                turns = 1;
+//                            }
+//                        }
                     }
                 }
             }
@@ -182,8 +182,8 @@ public class GameRepository {
         //means that current player has no neighbours that are non occupied
         player.setScore(1);
         opponent.setScore(1);
-        //So scores must be sended to DB
-        putscore(new Player[]{player, opponent});
+        //So scores must be sent to DB
+//        put score(new Player[]{player, opponent});
         return false;
     }
 
@@ -194,7 +194,7 @@ public class GameRepository {
             for (int j = 0; j < 3; j++) {
                 for (int k = 0; k < 3; k++) {
                     if (barr2[j][k] == b) {
-                        //proccess
+                        //process
                         int n = 0;
                         for (int l = 0; l < 3; l++) {
                             if (b.getPiece().getOwner() == barr2[j][l].getPiece().getOwner()) {
@@ -275,7 +275,7 @@ public class GameRepository {
         }
     }
 
-    public boolean AccessDelete() {
+    public boolean accessDelete() {
         int a = 0;
         for (int i = 0; i < board.getHouses().length; i++) {
             if (board.getHouses()[i].isTic()) {

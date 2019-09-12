@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     android:background="@color/colorPrimaryDark"
     android:paddingBottom="8dp"
     android:orientation="vertical">
@@ -11,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:fontFamily="@font/iran_sans_fanum"
+        android:fontFamily="@font/iran_sans_bold"
         android:textSize="18sp"
         android:text="نوع بازی را مشخص کن:"
         android:gravity="center"
@@ -39,7 +41,7 @@
             android:padding="8dp"/>
         <TextView
             android:id="@+id/ai_game"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:background="@drawable/option_object_back"
             android:layout_height="wrap_content"
@@ -55,7 +57,7 @@
             android:padding="8dp"/>
         <TextView
             android:id="@+id/self_game"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:background="@drawable/option_object_back"
             android:layout_height="wrap_content"

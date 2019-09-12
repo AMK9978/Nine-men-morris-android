@@ -38,13 +38,13 @@ class RatingFragment : Fragment() {
         searchBtn.setOnClickListener {
 
         }
-        val ratingRecycler = root.findViewById<RecyclerView>(R.id.rating_recycler)
+        val ratingRecycler = root.findViewById(R.id.rating_recycler) as RecyclerView
         val persons = arrayListOf<Person>()
         val person = Person("اکبر ترینم")
-        person.rating = 1202
+        person.score = 1202
         person.id = 1
         val person2 = Person("امیر ترینم")
-        person2.rating = 1402
+        person2.score = 1402
         person2.id = 2
 
         persons.add(person)
