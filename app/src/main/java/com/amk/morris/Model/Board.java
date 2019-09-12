@@ -53,4 +53,9 @@ public class Board {
     public void setHouses(House[] houses) {
         this.houses = houses;
     }
+
+    public void isTic(Player player){
+
+    }
+
 }

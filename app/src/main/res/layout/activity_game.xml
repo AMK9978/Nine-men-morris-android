@@ -107,7 +107,7 @@
 
 
             <ImageView
-                android:id="@+id/button"
+                android:id="@+id/btn7"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -121,7 +121,7 @@
                 app:layout_constraintVertical_bias="0.306" />
 
             <ImageView
-                android:id="@+id/button4"
+                android:id="@+id/btn8"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -136,7 +136,7 @@
                 app:layout_constraintVertical_bias="0.306" />
 
             <ImageView
-                android:id="@+id/button3"
+                android:id="@+id/btn6"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -151,7 +151,7 @@
                 app:layout_constraintVertical_bias="0.306" />
 
             <ImageView
-                android:id="@+id/button26"
+                android:id="@+id/btn11"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -166,7 +166,7 @@
                 app:layout_constraintVertical_bias="0.502" />
 
             <ImageView
-                android:id="@+id/button30"
+                android:id="@+id/btn15"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -181,7 +181,7 @@
                 app:layout_constraintVertical_bias="0.67" />
 
             <ImageView
-                android:id="@+id/button31"
+                android:id="@+id/btn16"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -195,7 +195,7 @@
                 app:layout_constraintVertical_bias="0.67" />
 
             <ImageView
-                android:id="@+id/button32"
+                android:id="@+id/btn17"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -210,7 +210,7 @@
                 app:layout_constraintVertical_bias="0.67" />
 
             <ImageView
-                android:id="@+id/button33"
+                android:id="@+id/btn12"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -225,7 +225,7 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <ImageView
-                android:id="@+id/button34"
+                android:id="@+id/btn13"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -239,7 +239,7 @@
                 app:layout_constraintVertical_bias="0.502" />
 
             <ImageView
-                android:id="@+id/button35"
+                android:id="@+id/btn14"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -253,7 +253,7 @@
                 app:layout_constraintVertical_bias="0.502" />
 
             <ImageView
-                android:id="@+id/button36"
+                android:id="@+id/btn23"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -267,7 +267,7 @@
                 app:layout_constraintVertical_bias="0.98" />
 
             <ImageView
-                android:id="@+id/button37"
+                android:id="@+id/btn22"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -280,7 +280,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
-                android:id="@+id/button38"
+                android:id="@+id/btn19"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -293,7 +293,7 @@
                 app:layout_constraintVertical_bias="0.83" />
 
             <ImageView
-                android:id="@+id/button39"
+                android:id="@+id/btn20"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -307,7 +307,7 @@
                 app:layout_constraintVertical_bias="0.84000003" />
 
             <ImageView
-                android:id="@+id/button5"
+                android:id="@+id/btn3"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -322,7 +322,7 @@
                 app:layout_constraintVertical_bias="0.171" />
 
             <ImageView
-                android:id="@+id/button25"
+                android:id="@+id/btn10"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -337,7 +337,7 @@
                 app:layout_constraintVertical_bias="0.502" />
 
             <ImageView
-                android:id="@+id/button29"
+                android:id="@+id/btn18"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -351,7 +351,7 @@
                 app:layout_constraintVertical_bias="0.825" />
 
             <ImageView
-                android:id="@+id/button27"
+                android:id="@+id/btn9"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -366,7 +366,7 @@
                 app:layout_constraintVertical_bias="0.502" />
 
             <ImageView
-                android:id="@+id/button28"
+                android:id="@+id/btn21"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -380,7 +380,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
-                android:id="@+id/button6"
+                android:id="@+id/btn4"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -394,7 +394,7 @@
                 app:layout_constraintVertical_bias="0.151" />
 
             <ImageView
-                android:id="@+id/button7"
+                android:id="@+id/btn5"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -409,7 +409,7 @@
                 app:layout_constraintVertical_bias="0.151" />
 
             <ImageView
-                android:id="@+id/button9"
+                android:id="@+id/btn2"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -424,7 +424,7 @@
                 app:layout_constraintVertical_bias="0.016" />
 
             <ImageView
-                android:id="@+id/button23"
+                android:id="@+id/btn1"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
@@ -438,7 +438,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
-                android:id="@+id/button24"
+                android:id="@+id/btn0"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignStart="@+id/imageView"
