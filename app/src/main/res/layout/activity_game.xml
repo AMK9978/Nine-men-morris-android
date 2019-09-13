@@ -88,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layoutDirection="ltr"
             android:orientation="vertical">
 
 
@@ -485,8 +486,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:tint="@color/silver_light"
-                        app:srcCompat="@drawable/circle_shape_outline" />
+                        app:srcCompat="@drawable/whitemohre_min" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -514,7 +514,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/circle_shape_outline" />
+                        app:srcCompat="@drawable/blackmohre_min" />
                 </FrameLayout>
             </LinearLayout>
 

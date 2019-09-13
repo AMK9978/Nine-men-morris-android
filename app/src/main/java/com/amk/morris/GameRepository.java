@@ -52,6 +52,10 @@ public class GameRepository {
         barr = new House[][][]{b1, b2, b3, b4};
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
     public void process(int id) {
         if (!players[turn].isWanttoRemove()) {
             //means that I don't want to remove the piece of this house

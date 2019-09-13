@@ -1,6 +1,8 @@
 package com.amk.morris
 
+import android.media.Image
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -8,6 +10,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.amk.morris.Model.Person
 import com.amk.morris.Model.Player
+import com.squareup.picasso.Picasso
+import java.io.File
 
 class GameActivity : AppCompatActivity() {
 
@@ -42,6 +46,13 @@ class GameActivity : AppCompatActivity() {
     private var btn22: ImageView? = null
     private var btn23: ImageView? = null
 
+    private fun loadProfileImage() {
+        val mainFile = File(Environment.getExternalStorageDirectory(), "Morris/profileImage.jpg")
+        val oppFile = File(Environment.getExternalStorageDirectory(), "Morris/profileImage.jpg")
+        Picasso.get().load(mainFile).fit().placeholder(R.drawable.ic_person_black_24dp).into(self_profile)
+        Picasso.get().load(oppFile).fit().placeholder(R.drawable.ic_person_black_24dp).into(opponent_profile)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -52,6 +63,7 @@ class GameActivity : AppCompatActivity() {
         val selfName = intent.getStringExtra("selfName")
         val oppName = intent.getStringExtra("oppName")
         val type = intent.getStringExtra("type")
+
 
         Log.i("TAG", "$selfName vs $oppName and $type")
         val person1 = Person(selfName)
@@ -64,6 +76,9 @@ class GameActivity : AppCompatActivity() {
         player2.drawable = resources.getDrawable(R.drawable.blackmohre_min)
         val selfName_txt = findViewById<TextView>(R.id.self_name)
         val oppName_txt = findViewById<TextView>(R.id.opponent_name)
+        self_profile = findViewById(R.id.profile_image)
+        opponent_profile = findViewById(R.id.opponent_profile_image)
+        loadProfileImage()
         selfName_txt.text = selfName
         oppName_txt.text = oppName
 
@@ -92,6 +107,31 @@ class GameActivity : AppCompatActivity() {
         btn22 = findViewById(R.id.btn22)
         btn23 = findViewById(R.id.btn23)
         val gameRepository = GameRepository(player1, player2)
+        gameRepository.board.houses[1].imageView = btn0
+        gameRepository.board.houses[2].imageView = btn1
+        gameRepository.board.houses[3].imageView = btn2
+        gameRepository.board.houses[4].imageView = btn3
+        gameRepository.board.houses[5].imageView = btn4
+        gameRepository.board.houses[6].imageView = btn5
+        gameRepository.board.houses[7].imageView = btn6
+        gameRepository.board.houses[8].imageView = btn7
+        gameRepository.board.houses[9].imageView = btn8
+        gameRepository.board.houses[10].imageView = btn9
+        gameRepository.board.houses[11].imageView = btn10
+        gameRepository.board.houses[12].imageView = btn11
+        gameRepository.board.houses[13].imageView = btn12
+        gameRepository.board.houses[14].imageView = btn13
+        gameRepository.board.houses[15].imageView = btn14
+        gameRepository.board.houses[16].imageView = btn15
+        gameRepository.board.houses[17].imageView = btn16
+        gameRepository.board.houses[18].imageView = btn17
+        gameRepository.board.houses[19].imageView = btn18
+        gameRepository.board.houses[20].imageView = btn19
+        gameRepository.board.houses[21].imageView = btn20
+        gameRepository.board.houses[22].imageView = btn21
+        gameRepository.board.houses[23].imageView = btn22
+        gameRepository.board.houses[24].imageView = btn23
+
         btn0?.setOnClickListener {
             gameRepository.process(0)
         }
