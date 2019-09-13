@@ -94,36 +94,24 @@ public class Player extends Person implements Serializable {
         this.wanttoRemove = wanttoRemove;
     }
 
-    public void movePiece(House origin, House destination) {
-        if (!canMovePiece(origin, destination)) {
-            return;
-        }
-        //TODO: Else, move this piece and intent its board and intent game
-    }
 
-    public void removePiece(Piece piece, House origin) {
-        if (!canRemovePiece(origin)) {
-            return;
-        }
-        //TODO: Else, remove this piece and intent its owner and board and intent game
-    }
-
-    public boolean canRemovePiece(House origin) {
+    public boolean removePiece(House origin) {
         //TODO: Add validation for removing piece of this house
         if (!wanttoRemove)
             return false;
         return true;
     }
 
-    public boolean canMovePiece(House origin, House destination) {
+    public boolean movePiece(House origin, House destination) {
         //TODO: Add validation for move piece of this house to this des?
-        if (!canChoose(origin)) {
+        if (!choose(origin)) {
             return false;
         }
+
         return true;
     }
 
-    public boolean canChoose(House origin) {
+    public boolean choose(House origin) {
         //TODO: A piece on this house, can be chosen or not?
         return true;
     }
