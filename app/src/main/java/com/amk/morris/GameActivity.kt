@@ -45,6 +45,8 @@ class GameActivity : AppCompatActivity() {
     private var btn21: ImageView? = null
     private var btn22: ImageView? = null
     private var btn23: ImageView? = null
+    private var self_pfree: TextView? = null
+    private var opp_pfree: TextView? = null
 
     private fun loadProfileImage() {
         val mainFile = File(Environment.getExternalStorageDirectory(), "Morris/profileImage.jpg")
@@ -63,7 +65,9 @@ class GameActivity : AppCompatActivity() {
         val selfName = intent.getStringExtra("selfName")
         val oppName = intent.getStringExtra("oppName")
         val type = intent.getStringExtra("type")
-
+        hint = findViewById(R.id.hint_txt)
+        opp_pfree = findViewById(R.id.opp_pfree_txt)
+        self_pfree = findViewById(R.id.self_pfree_txt)
 
         Log.i("TAG", "$selfName vs $oppName and $type")
         val person1 = Person(selfName)
@@ -131,78 +135,114 @@ class GameActivity : AppCompatActivity() {
         gameRepository.board.houses[22].imageView = btn21
         gameRepository.board.houses[23].imageView = btn22
         gameRepository.board.houses[24].imageView = btn23
-
         btn0?.setOnClickListener {
-            gameRepository.process(0)
+            gameRepository.process(1)
+            updatePfrees(gameRepository)
+            Log.i("TAG", "click on 0")
         }
         btn1?.setOnClickListener {
-            gameRepository.process(1)
+            gameRepository.process(2)
+            updatePfrees(gameRepository)
+            Log.i("TAG", "click on 1")
         }
         btn2?.setOnClickListener {
-            gameRepository.process(2)
+            gameRepository.process(3)
+            updatePfrees(gameRepository)
+            Log.i("TAG", "click on 2")
         }
         btn3?.setOnClickListener {
-            gameRepository.process(3)
+            gameRepository.process(4)
+            updatePfrees(gameRepository)
+            Log.i("TAG", "click on 3")
         }
         btn4?.setOnClickListener {
-            gameRepository.process(4)
+            gameRepository.process(5)
+            updatePfrees(gameRepository)
         }
         btn5?.setOnClickListener {
-            gameRepository.process(5)
+            gameRepository.process(6)
+            updatePfrees(gameRepository)
         }
         btn6?.setOnClickListener {
-            gameRepository.process(6)
+            gameRepository.process(7)
+            updatePfrees(gameRepository)
         }
         btn7?.setOnClickListener {
-            gameRepository.process(7)
+            gameRepository.process(8)
+            updatePfrees(gameRepository)
         }
         btn8?.setOnClickListener {
-            gameRepository.process(8)
+            gameRepository.process(9)
+            updatePfrees(gameRepository)
         }
         btn9?.setOnClickListener {
-            gameRepository.process(9)
+            gameRepository.process(10)
+            updatePfrees(gameRepository)
         }
         btn10?.setOnClickListener {
-            gameRepository.process(10)
+            gameRepository.process(11)
+            updatePfrees(gameRepository)
         }
         btn11?.setOnClickListener {
-            gameRepository.process(11)
+            gameRepository.process(12)
+            updatePfrees(gameRepository)
         }
         btn12?.setOnClickListener {
-            gameRepository.process(12)
+            gameRepository.process(13)
+            updatePfrees(gameRepository)
         }
         btn13?.setOnClickListener {
-            gameRepository.process(13)
+            gameRepository.process(14)
+            updatePfrees(gameRepository)
         }
         btn14?.setOnClickListener {
-            gameRepository.process(14)
+            gameRepository.process(15)
+            updatePfrees(gameRepository)
         }
         btn15?.setOnClickListener {
-            gameRepository.process(15)
+            gameRepository.process(16)
+            updatePfrees(gameRepository)
         }
         btn16?.setOnClickListener {
-            gameRepository.process(16)
+            gameRepository.process(17)
+            updatePfrees(gameRepository)
         }
         btn17?.setOnClickListener {
-            gameRepository.process(17)
+            gameRepository.process(18)
+            updatePfrees(gameRepository)
         }
         btn18?.setOnClickListener {
-            gameRepository.process(18)
+            gameRepository.process(19)
+            updatePfrees(gameRepository)
         }
         btn19?.setOnClickListener {
-            gameRepository.process(19)
+            gameRepository.process(20)
+            updatePfrees(gameRepository)
         }
         btn20?.setOnClickListener {
-            gameRepository.process(20)
+            gameRepository.process(21)
+            updatePfrees(gameRepository)
         }
         btn21?.setOnClickListener {
-            gameRepository.process(21)
+            gameRepository.process(22)
+            updatePfrees(gameRepository)
         }
         btn22?.setOnClickListener {
-            gameRepository.process(22)
+            gameRepository.process(23)
+            updatePfrees(gameRepository)
         }
         btn23?.setOnClickListener {
-            gameRepository.process(23)
+            gameRepository.process(24)
+            updatePfrees(gameRepository)
         }
+    }
+    private fun updatePfrees(gameRepository: GameRepository){
+        opp_pfree?.setText(gameRepository.players[1].pfree.toString())
+        self_pfree?.setText(gameRepository.players[0].pfree.toString())
+
+    }
+
+    private fun updateHint(text : String){
+        hint?.setText(text)
     }
 }

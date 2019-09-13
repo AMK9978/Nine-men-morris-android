@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
@@ -38,7 +39,7 @@ class SignActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign)
         email_txt = findViewById(R.id.useremail_txt)
         pass_txt = findViewById(R.id.userpass_txt)
-        pass_txt = findViewById(R.id.username_txt)
+        name_txt = findViewById(R.id.username_txt)
         profileImage = findViewById(R.id.profile_image)
         val background_image = findViewById<ImageView>(R.id.imageView4)
         ObjectAnimator.ofFloat(background_image, View.ROTATION, 0f, 360f).setDuration(60000).start()
@@ -59,8 +60,12 @@ class SignActivity : AppCompatActivity() {
         } else {
             //TODO: Send info's to the server and get callback
             saveImageToInternalStorage(profileImage!!.drawable)
-            getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putString("name", name).commit()
-            getSharedPreferences("pref", Context.MODE_PRIVATE).edit().putString("email", email).commit()
+            val editor = Util.sharedPreferences.edit()
+            editor.putString("name", name)
+            editor.putString("email", email)
+            editor.apply()
+            val selfName = getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "haji") as String
+            Log.i("TAG", "NAME: $selfName, $name")
             val toMain = Intent(this, ProfileActivity::class.java)
             startActivity(toMain)
             finish()

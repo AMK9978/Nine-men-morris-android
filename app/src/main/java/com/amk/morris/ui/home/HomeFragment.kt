@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +56,8 @@ class HomeFragment : Fragment() {
             val onlineGame = dialog?.findViewById<TextView>(R.id.online_game)
             val aiGame = dialog?.findViewById<TextView>(R.id.ai_game)
             val selfGame = dialog?.findViewById<TextView>(R.id.self_game)
-            val selfName = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "من!") as String
+            val selfName = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "من!") as String
+            Log.i("TAG", "NAME: $selfName")
             onlineGame?.setOnClickListener {
                 dialog.dismiss()
                 val dialog2 = context?.let { it1 -> Dialog(it1) }

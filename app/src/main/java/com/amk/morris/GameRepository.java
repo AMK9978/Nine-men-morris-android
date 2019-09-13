@@ -32,6 +32,14 @@ public class GameRepository {
         init();
     }
 
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
     private void init() {
         b1 = new House[][]{{board.getHouses()[1], board.getHouses()[2], board.getHouses()[3]},
                 {board.getHouses()[4], board.getHouses()[5], board.getHouses()[6]}, {board.getHouses()[7],
