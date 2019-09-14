@@ -1,7 +1,6 @@
 package com.amk.morris.Model;
 
 public class Board {
-    private boolean tic = false;
     private static Board BOARD = new Board();
 
     private House[] houses = new House[]{
@@ -39,14 +38,6 @@ public class Board {
         return BOARD;
     }
 
-    public boolean isTic() {
-        return tic;
-    }
-
-    public void setTic(boolean tic) {
-        this.tic = tic;
-    }
-
     public House[] getHouses() {
         return houses;
     }
@@ -55,8 +46,5 @@ public class Board {
         this.houses = houses;
     }
 
-    public void isTic(Player player){
-
-    }
 
 }

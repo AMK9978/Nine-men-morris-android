@@ -11,11 +11,13 @@ import java.util.ArrayList;
 public class Player extends Person implements Serializable {
     private Person person;
     private int playerNumber;
+    private Piece playerPiece;
     private Context context;
     private boolean wanttoRemove = false;
     private boolean wanttoMove = false;
     private ArrayList<Piece> pieces = new ArrayList<>();
     private Drawable drawable;
+    private ArrayList<House> houses = new ArrayList<>();
     private Drawable chosen_drawable;
     private int score = 0;
     public int pfree = 12;
@@ -26,8 +28,11 @@ public class Player extends Person implements Serializable {
         this.context = context;
         this.person = person;
         this.playerNumber = playerNumber;
+        Piece playerPiece = new Piece();
+        playerPiece.setOwner(this);
         //TODO: Based on user chooses, assign piece
         if (playerNumber == 0) {
+            playerPiece.setDrawable(context.getResources().getDrawable(R.drawable.whitemohre_min));
             for (int i = 0; i < 12; i++) {
                 Piece piece = new Piece();
                 piece.setDrawable(context.getResources().getDrawable(R.drawable.whitemohre_min));
@@ -35,6 +40,7 @@ public class Player extends Person implements Serializable {
                 pieces.add(piece);
             }
         } else {
+            playerPiece.setDrawable(context.getResources().getDrawable(R.drawable.whitemohre_min));
             for (int i = 0; i < 12; i++) {
                 Piece piece = new Piece();
                 piece.setDrawable(context.getResources().getDrawable(R.drawable.blackmohre_min));
@@ -42,6 +48,23 @@ public class Player extends Person implements Serializable {
                 pieces.add(piece);
             }
         }
+        this.setPlayerPiece(playerPiece);
+    }
+
+    public ArrayList<House> getHouses() {
+        return houses;
+    }
+
+    public void setHouses(ArrayList<House> houses) {
+        this.houses = houses;
+    }
+
+    public Piece getPlayerPiece() {
+        return playerPiece;
+    }
+
+    public void setPlayerPiece(Piece playerPiece) {
+        this.playerPiece = playerPiece;
     }
 
     public boolean isWanttoMove(House house) {

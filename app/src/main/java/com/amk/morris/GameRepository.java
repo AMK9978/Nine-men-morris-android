@@ -23,8 +23,6 @@ public class GameRepository {
     private House barr[][][];
     private House barr2[][] = new House[3][3];
     private House home;
-    private ArrayList<House> houses = new ArrayList<>();
-    private ArrayList<House> houses2 = new ArrayList<>();
 
     public GameRepository(Player player1, Player player2) {
         this.game = new Game(player1, player2);
@@ -96,15 +94,16 @@ public class GameRepository {
                 Log.i("TAG", "move!");
                 if (players[turn].isWanttoMove(board.getHouses()[id])) {
                     if (home != null) {
-                        home.setDrawable(players[turn].getChosen_drawable());
+                        home.setDrawable(players[turn].getDrawable());
                     }
-                    board.getHouses()[id].setDrawable(players[turn].getDrawable());
+                    Log.i("TAG", "HERE, Chosen one thing");
+                    board.getHouses()[id].setDrawable(players[turn].getChosen_drawable());
                     home = board.getHouses()[id];
 
                 } else if (home != null) {
                     //means that a piece chose and now Player wants to put it here
                     if (movePiece(players[turn], home, board.getHouses()[id])) {//Move() processed successful
-                        board.getHouses()[id].setDrawable(players[turn].getDrawable());
+                        board.getHouses()[id].setDrawable(players[turn].getChosen_drawable());
                         home.setImageView(null);
                         home = null;
                         if (!players[turn].isWanttoRemove()) {//It's possible that after put piece, Dooz happened
@@ -129,10 +128,20 @@ public class GameRepository {
             if (removePiece(players[turn], board.getHouses()[id])) {
                 if (turn == 0) {
                     turn = 1;
-                    accessMove(players[turn], players[0]);
+                    accessMove(players[1], players[0]);
+                    if (players[turn].pfree > 0){
+                        this.game.setStatus("یه مهره بذار");
+                    }else{
+                        this.game.setStatus("یه مهره حذف کن");
+                    }
                 } else {
                     turn = 0;
-                    accessMove(players[turn], players[1]);
+                    accessMove(players[0], players[1]);
+                    if (players[turn].pfree > 0){
+                        this.game.setStatus("یه مهره بذار");
+                    }else{
+                        this.game.setStatus("یه مهره حذف کن");
+                    }
                 }
                 Log.i("TAG", "Move! ,turn:" + turn);
             }
@@ -140,19 +149,20 @@ public class GameRepository {
     }
 
     private boolean accessMove(Player player, Player opponent) {
-        if (houses.size() == 0)
+        if (player.getHouses().size() == 0) {
             return true;
+        }
         //We can be sure that current player has house
         //We want to check all of his houses
         int turns;
-        for (int m = 0; m < houses.size(); m++) {
+        for (int m = 0; m < player.getHouses().size(); m++) {
             turns = 0;
             for (int i = 0; i < 4; i++) {
                 //Houses was divided into 4 arrays and we check all of them
                 barr2 = barr[i];
                 for (int j = 0; j < 3; j++) {
                     for (int k = 0; k < 3; k++) {
-                        if (houses.get(m) == barr2[k][j]) { //processing on the a house starts
+                        if (player.getHouses().get(m) == barr2[k][j]) { //processing on the a house starts
                             ArrayList<House> b = new ArrayList<>(); //to contain it's neighbours
                             try {
                                 b.add(barr2[k - 1][j]);
@@ -174,9 +184,9 @@ public class GameRepository {
                             //All of it's neighbours are saved to checked
                             for (int l = 0; l < 4; l++) {
                                 try {
-                                    if (b.get(l).getPiece() == null) {
+                                    if (!b.get(l).isOccupied()) {
                                         //means that one house exists that's not occupied
-                                        System.out.println("current house: " + houses.get(m).getIndex());
+                                        System.out.println("current house: " + player.getHouses().get(m).getIndex());
                                         System.out.println("free house: " + b.get(l).getIndex());
                                         return true;
                                     }
@@ -212,7 +222,7 @@ public class GameRepository {
                         //process
                         int n = 0;
                         for (int l = 0; l < 3; l++) {
-                            if (b.getPiece().getOwner() == barr2[j][l].getPiece().getOwner()) {
+                            if (b.getOwner() == barr2[j][l].getOwner()) {
                                 n++;
                             }
                         }
@@ -235,7 +245,7 @@ public class GameRepository {
                         //process
                         int n = 0;
                         for (int l = 0; l < 3; l++) {
-                            if (barr2[l][j].getPiece().getOwner() == b.getPiece().getOwner()) {
+                            if (barr2[l][j].getOwner() == b.getOwner()) {
                                 n++;
                             }
                         }
@@ -266,9 +276,9 @@ public class GameRepository {
         for (int i = 0; i < 4; i++) {
             barr2 = barr[i];
             for (int j = 0; j < 3; j++) {
-                if (barr2[j][0].getPiece() != null) {
-                    if (barr2[j][0].getPiece().getOwner().equals(barr2[j][1].getPiece().getOwner())) {
-                        if (barr2[j][1].getPiece().getOwner() == barr2[j][2].getPiece().getOwner()) {
+                if (!barr2[j][0].isOccupied()) {
+                    if (barr2[j][0].getOwner() == barr2[j][1].getOwner()) {
+                        if (barr2[j][1].getOwner() == barr2[j][2].getOwner()) {
                             barr2[j][0].setTic(true);
                             barr2[j][1].setTic(true);
                             barr2[j][2].setTic(true);
@@ -277,9 +287,9 @@ public class GameRepository {
                 }
             }
             for (int j = 0; j < 3; j++) {
-                if (barr2[0][j].getPiece() != null) {
-                    if (barr2[0][j].getPiece().getOwner() == barr2[1][j].getPiece().getOwner()) {
-                        if (barr2[1][j].getPiece().getOwner() == barr2[2][j].getPiece().getOwner()) {
+                if (!barr2[0][j].isOccupied()) {
+                    if (barr2[0][j].getOwner() == barr2[1][j].getOwner()) {
+                        if (barr2[1][j].getOwner() == barr2[2][j].getOwner()) {
                             barr2[0][j].setTic(true);
                             barr2[1][j].setTic(true);
                             barr2[2][j].setTic(true);
@@ -314,7 +324,7 @@ public class GameRepository {
             return false;
         }
         //We must check Accessibility condition for moving from h to b here
-        if (origin.getPiece() == null) {
+        if (!origin.isOccupied()) {
             for (int i = 0; i < 4; i++) {
                 barr2 = barr[i];
                 for (int j = 0; j < 3; j++) {
@@ -322,11 +332,13 @@ public class GameRepository {
                         if (barr2[j][k] == destination) {
                             try {
                                 if (barr2[j][k - 1] == origin) {
-                                    players[turn].getPieces().remove(destination.getPiece());
-                                    destination.setPiece(null);
+                                    players[turn].getHouses().remove(destination);
                                     destination.setTic(false);
-                                    players[turn].getPieces().add(origin.getPiece());
+                                    destination.setOwner(null);
+                                    destination.setOccupied(false);
+                                    players[turn].getHouses().add(origin);
                                     origin.setTic(true);
+
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
                                     }
@@ -338,12 +350,12 @@ public class GameRepository {
                             }
                             try {
                                 if (barr2[j][k + 1] == origin) {
-                                    players[turn].getPieces().remove(destination.getPiece());
-                                    destination.setPiece(null);
+                                    players[turn].getHouses().remove(destination);
                                     destination.setTic(false);
-                                    destination = null;
-                                    players[turn].getPieces().add(origin.getPiece());
-                                    origin.getPiece().setOwner(players[turn]);
+                                    destination.setOwner(null);
+                                    destination.setOccupied(true);
+                                    players[turn].getHouses().add(origin);
+                                    origin.setOwner(players[turn]);
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
                                     }
@@ -361,13 +373,11 @@ public class GameRepository {
                             //process
                             try {
                                 if (barr2[k - 1][j] == origin) {
-
-                                    players[turn].getPieces().remove(destination.getPiece());
-                                    destination.getPiece().setOwner(null);
+                                    players[turn].getHouses().remove(destination);
                                     destination.setTic(false);
-                                    destination = null;
-                                    players[turn].getPieces().add(origin.getPiece());
-                                    origin.getPiece().setOwner(players[turn]);
+                                    destination.setOwner(null);
+                                    players[turn].getHouses().add(origin);
+                                    origin.setOwner(players[turn]);
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
                                     }
@@ -379,11 +389,11 @@ public class GameRepository {
                             }
                             try {
                                 if (barr2[k + 1][j] == origin) {
-                                    players[turn].getPieces().remove(destination.getPiece());
-                                    destination.getPiece().setOwner(null);
+                                    players[turn].getHouses().remove(destination);
+                                    destination.setOwner(null);
                                     destination.setTic(false);
-                                    players[turn].getPieces().add(origin.getPiece());
-                                    origin.getPiece().setOwner(players[turn]);
+                                    players[turn].getHouses().add(origin);
+                                    origin.setOwner(players[turn]);
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
                                     }
@@ -403,16 +413,62 @@ public class GameRepository {
     }
 
 
-    private boolean removePiece(Player player, House origin) {
-        //TODO: Add validation for removing piece of this house
-        if (!player.isWanttoRemove())
-            return false;
-        return true;
+    private boolean removePiece(Player player, House b) {
+        int a = 0;
+        if (b.isOccupied()) {
+            if (b.getOwner() != players[turn]) {
+                if (!b.isTic()) {
+                    b.getImageView().setImageDrawable(null);
+                    player.setWanttoRemove(false);
+                    b.setOccupied(false);
+                    b.setOwner(null);
+                    if (ad == 1) {
+//                        Board.Return(player, turn);
+                        ad = 0;
+                    }
+
+                    if (turn == 0) {
+                        players[1].pnum--;
+                        players[1].getHouses().remove(b);
+                        if (players[1].pfree > 0){
+                            this.game.setStatus("یه مهره بذار");
+                        }else{
+                            this.game.setStatus("یه مهره تکون بده");
+                        }
+                    } else {
+                        players[0].pnum--;
+                        players[0].getHouses().remove(b);
+                        if (players[0].pfree > 0){
+                            this.game.setStatus("یه مهره بذار");
+                        }else{
+                            this.game.setStatus("یه مهره تکون بده");
+                        }
+                    }
+
+//                    if (Gamecon(player, cp) == false) {
+//                        Log.i("TAG", "End game!");
+//                    }
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    private boolean choose(Player player, House origin) {
-        //TODO: A piece on this house, can be chosen or not?
-        return true;
+    private boolean choose(Player player, House b) {
+        if (!b.isOccupied()) {
+            b.setOccupied(true);
+            b.setOwner(players[turn]);
+            player.getHouses().add(b);
+            player.pfree--;
+            if (Ticfind(b)) {
+                player.setWanttoRemove(true);
+                this.game.setStatus("یه مهره از حریف رو حذف کن");
+            }
+            return true;
+        }
+
+        return false;
     }
 
 

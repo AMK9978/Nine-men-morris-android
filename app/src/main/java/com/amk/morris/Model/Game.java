@@ -3,6 +3,7 @@ package com.amk.morris.Model;
 public class Game {
     private Board board;
     private Player players[] = new Player[2];
+    private String status;
 
     public Game(Player player1, Player player2) {
         board = Board.getBOARD();
@@ -24,5 +25,13 @@ public class Game {
 
     public void setPlayers(Player[] players) {
         this.players = players;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

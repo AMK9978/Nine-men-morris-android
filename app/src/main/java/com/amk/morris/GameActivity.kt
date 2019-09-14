@@ -1,6 +1,5 @@
 package com.amk.morris
 
-import android.media.Image
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -236,13 +235,14 @@ class GameActivity : AppCompatActivity() {
             updatePfrees(gameRepository)
         }
     }
-    private fun updatePfrees(gameRepository: GameRepository){
-        opp_pfree?.setText(gameRepository.players[1].pfree.toString())
-        self_pfree?.setText(gameRepository.players[0].pfree.toString())
+
+    private fun updatePfrees(gameRepository: GameRepository) {
+        opp_pfree?.text = gameRepository.players[1].pnum.toString()
+        self_pfree?.text = gameRepository.players[0].pnum.toString()
 
     }
 
-    private fun updateHint(text : String){
+    private fun updateHint(text: String) {
         hint?.setText(text)
     }
 }

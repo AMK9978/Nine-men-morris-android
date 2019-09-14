@@ -5,10 +5,11 @@ import android.widget.ImageView;
 
 public class House {
     private int index;
-    private Piece piece = null;
     private Drawable drawable = null;
     private ImageView imageView;
-    private boolean tic;
+    private boolean tic = false;
+    private Player owner;
+    private boolean isOccupied = false;
 
     public House(int index) {
         this.index = index;
@@ -21,14 +22,6 @@ public class House {
 
     public void setTic(boolean tic) {
         this.tic = tic;
-    }
-
-    public Piece getPiece() {
-        return piece;
-    }
-
-    public void setPiece(Piece piece) {
-        this.piece = piece;
     }
 
     public int getIndex() {
@@ -50,6 +43,22 @@ public class House {
 
     public ImageView getImageView() {
         return imageView;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        isOccupied = occupied;
     }
 
     public void setImageView(ImageView imageView) {
