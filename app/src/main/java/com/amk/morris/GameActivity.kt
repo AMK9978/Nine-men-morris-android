@@ -237,9 +237,10 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun updatePfrees(gameRepository: GameRepository) {
-        opp_pfree?.text = gameRepository.players[1].pnum.toString()
-        self_pfree?.text = gameRepository.players[0].pnum.toString()
-
+        opp_pfree?.text = gameRepository.players[1].pfree.toString()
+        self_pfree?.text = gameRepository.players[0].pfree.toString()
+        hint?.text = gameRepository.game.status
+        Log.i("TAG", gameRepository.game.status)
     }
 
     private fun updateHint(text: String) {

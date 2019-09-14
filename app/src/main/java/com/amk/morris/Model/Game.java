@@ -3,7 +3,7 @@ package com.amk.morris.Model;
 public class Game {
     private Board board;
     private Player players[] = new Player[2];
-    private String status;
+    private String status = "یه مهره بذار";
 
     public Game(Player player1, Player player2) {
         board = Board.getBOARD();
