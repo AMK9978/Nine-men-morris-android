@@ -1,16 +1,24 @@
 package com.amk.morris
 
+import android.app.Dialog
+import android.content.Intent
+import android.content.res.AssetFileDescriptor
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.Window
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.amk.morris.Model.HistoryModel
 import com.amk.morris.Model.Person
 import com.amk.morris.Model.Player
 import com.squareup.picasso.Picasso
 import java.io.File
+import java.io.IOException
 
 class GameActivity : AppCompatActivity() {
 
@@ -20,6 +28,7 @@ class GameActivity : AppCompatActivity() {
     var hints = arrayOf("یک مهره قرار بده", "نوبت حریف", "یک مهره از حریف حذف کن")
     var self_profile: ImageView? = null
     var opponent_profile: ImageView? = null
+    var turn: Int = 0
     private var btn0: ImageView? = null
     private var btn1: ImageView? = null
     private var btn2: ImageView? = null
@@ -61,9 +70,12 @@ class GameActivity : AppCompatActivity() {
                 .also { hyper ->
                     findViewById<TextView>(R.id.hint_txt).startAnimation(hyper)
                 }
+
         val selfName = intent.getStringExtra("selfName")
         val oppName = intent.getStringExtra("oppName")
         val type = intent.getStringExtra("type")
+        //TODO: turn should be received from server
+
         hint = findViewById(R.id.hint_txt)
         opp_pfree = findViewById(R.id.opp_pfree_txt)
         self_pfree = findViewById(R.id.self_pfree_txt)
@@ -74,8 +86,8 @@ class GameActivity : AppCompatActivity() {
         val player1 = Player(applicationContext, person1, 1)
         val player2 = Player(applicationContext, person2, 2)
         player1.drawable = resources.getDrawable(R.drawable.whitemohre_min)
-        player1.chosen_drawable = resources.getDrawable(R.drawable.whitemohre_chosen)
-        player2.chosen_drawable = resources.getDrawable(R.drawable.blackmohre_chosen)
+        player1.chosen_drawable = resources.getDrawable(R.drawable.asset9min)
+        player2.chosen_drawable = resources.getDrawable(R.drawable.asset10min)
         player2.drawable = resources.getDrawable(R.drawable.blackmohre_min)
         val selfName_txt = findViewById<TextView>(R.id.self_name)
         val oppName_txt = findViewById<TextView>(R.id.opponent_name)
@@ -110,6 +122,7 @@ class GameActivity : AppCompatActivity() {
         btn22 = findViewById(R.id.btn22)
         btn23 = findViewById(R.id.btn23)
         val gameRepository = GameRepository(player1, player2)
+        gameRepository.self = turn
         gameRepository.board.houses[1].imageView = btn0
         gameRepository.board.houses[2].imageView = btn1
         gameRepository.board.houses[3].imageView = btn2
@@ -135,115 +148,307 @@ class GameActivity : AppCompatActivity() {
         gameRepository.board.houses[23].imageView = btn22
         gameRepository.board.houses[24].imageView = btn23
         btn0?.setOnClickListener {
-            gameRepository.process(1)
+            when (gameRepository.process(1)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
             Log.i("TAG", "click on 0")
         }
         btn1?.setOnClickListener {
-            gameRepository.process(2)
             updatePfrees(gameRepository)
-            Log.i("TAG", "click on 1")
+            when (gameRepository.process(2)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
         }
         btn2?.setOnClickListener {
-            gameRepository.process(3)
             updatePfrees(gameRepository)
-            Log.i("TAG", "click on 2")
+            when (gameRepository.process(3)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
         }
         btn3?.setOnClickListener {
-            gameRepository.process(4)
+            when (gameRepository.process(4)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
             Log.i("TAG", "click on 3")
         }
         btn4?.setOnClickListener {
-            gameRepository.process(5)
+            when (gameRepository.process(5)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn5?.setOnClickListener {
-            gameRepository.process(6)
+            when (gameRepository.process(6)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn6?.setOnClickListener {
-            gameRepository.process(7)
+            when (gameRepository.process(7)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn7?.setOnClickListener {
-            gameRepository.process(8)
+            when (gameRepository.process(8)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn8?.setOnClickListener {
-            gameRepository.process(9)
+            when (gameRepository.process(9)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn9?.setOnClickListener {
-            gameRepository.process(10)
+            when (gameRepository.process(10)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn10?.setOnClickListener {
-            gameRepository.process(11)
+            when (gameRepository.process(11)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn11?.setOnClickListener {
-            gameRepository.process(12)
+            when (gameRepository.process(12)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn12?.setOnClickListener {
-            gameRepository.process(13)
+            when (gameRepository.process(13)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn13?.setOnClickListener {
-            gameRepository.process(14)
+            when (gameRepository.process(14)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn14?.setOnClickListener {
-            gameRepository.process(15)
+            when (gameRepository.process(15)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn15?.setOnClickListener {
-            gameRepository.process(16)
+            when (gameRepository.process(16)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn16?.setOnClickListener {
-            gameRepository.process(17)
+            when (gameRepository.process(17)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn17?.setOnClickListener {
-            gameRepository.process(18)
+            when (gameRepository.process(18)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn18?.setOnClickListener {
-            gameRepository.process(19)
+            when (gameRepository.process(19)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn19?.setOnClickListener {
-            gameRepository.process(20)
+            when (gameRepository.process(20)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn20?.setOnClickListener {
-            gameRepository.process(21)
+            when (gameRepository.process(21)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn21?.setOnClickListener {
-            gameRepository.process(22)
+            when (gameRepository.process(22)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn22?.setOnClickListener {
-            gameRepository.process(23)
+            when (gameRepository.process(23)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
         btn23?.setOnClickListener {
-            gameRepository.process(24)
+            when (gameRepository.process(24)) {
+                "firstsong" -> playFirstSong()
+                "secondsong" -> playSecondSong()
+                "choosesong" -> playChooseSong()
+            }
             updatePfrees(gameRepository)
         }
     }
 
     private fun updatePfrees(gameRepository: GameRepository) {
+
+
         opp_pfree?.text = gameRepository.players[1].pfree.toString()
         self_pfree?.text = gameRepository.players[0].pfree.toString()
         hint?.text = gameRepository.game.status
         Log.i("TAG", gameRepository.game.status)
+        if (gameRepository.isFinish) {
+            val dialog = Dialog(this)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.finish_object)
+            dialog.setCancelable(false)
+            dialog.show()
+            val finishBtn = dialog.findViewById<TextView>(R.id.confirm)
+            val statusTxt = dialog.findViewById<Button>(R.id.status_txt)
+            val selfName = dialog.findViewById<TextView>(R.id.self_name)
+            val oppName = dialog.findViewById<TextView>(R.id.opponent_name)
+            val opp = ++turn % 2
+            when {
+                gameRepository.gameStatus == "win" -> statusTxt.text = "برد"
+                gameRepository.gameStatus == "lose" -> statusTxt.text = "باخت"
+                else -> statusTxt.text = "تساوی"
+            }
+            selfName.text = gameRepository.players[turn].name
+            oppName.text = gameRepository.players[opp].name
+            val history = HistoryModel()
+            history.self = gameRepository.players[turn]
+            history.self = gameRepository.players[opp]
+            history.date = getCurrentDate()
+            finishBtn?.setOnClickListener {
+                dialog.dismiss()
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
+
+    //TODO: Should return current date in shamsi format
+    private fun getCurrentDate(): String? {
+        return "96/2/12"
     }
 
     private fun updateHint(text: String) {
-        hint?.setText(text)
+        hint?.text = text
     }
+
+    fun playFirstSong() {
+
+        val firstSong = MediaPlayer()
+        try {
+            val descriptor: AssetFileDescriptor
+            try {
+                descriptor = this.assets.openFd("p1.mp3")
+                firstSong.setDataSource(descriptor.fileDescriptor, descriptor.startOffset, descriptor.length)
+                descriptor.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            firstSong.prepare()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        Log.i("TAG", "First song")
+        firstSong.start()
+    }
+
+    fun playSecondSong() {
+
+        val secondSong = MediaPlayer()
+        try {
+            val descriptor: AssetFileDescriptor
+            try {
+                descriptor = this.assets.openFd("p2.mp3")
+                secondSong.setDataSource(descriptor.fileDescriptor, descriptor.startOffset, descriptor.length)
+                descriptor.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            secondSong.prepare()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        secondSong.start()
+    }
+
+    fun playChooseSong() {
+
+        val chooseSong = MediaPlayer()
+        try {
+            val descriptor: AssetFileDescriptor
+            try {
+                descriptor = this.assets.openFd("procc.mp3")
+                chooseSong.setDataSource(descriptor.fileDescriptor, descriptor.startOffset, descriptor.length)
+                descriptor.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            chooseSong.prepare()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        chooseSong.start()
+    }
+
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,6 +22,10 @@ class ContactFragment : Fragment() {
         contactViewModel =
                 ViewModelProviders.of(this).get(ContactViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_contact, container, false)
+        val backBtn = root.findViewById<ImageView>(R.id.back_btn)
+        backBtn.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
 //        val textView: TextView = root.findViewById(R.id.text_tools)
         contactViewModel.text.observe(this, Observer {
 //            textView.text = it

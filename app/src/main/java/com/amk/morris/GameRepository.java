@@ -1,6 +1,9 @@
 package com.amk.morris;
 
+import android.app.Dialog;
+import android.media.MediaPlayer;
 import android.util.Log;
+import android.view.Window;
 
 import com.amk.morris.Model.Board;
 import com.amk.morris.Model.Game;
@@ -22,7 +25,10 @@ public class GameRepository {
     private House b4[][];
     private House barr[][][];
     private House barr2[][] = new House[3][3];
-    private House home;
+    private House home = null;
+    private boolean finish = false;
+    private int self = 0;
+    private String gameStatus = "";
 
     public GameRepository(Player player1, Player player2) {
         this.game = new Game(player1, player2);
@@ -31,8 +37,28 @@ public class GameRepository {
         init();
     }
 
+    public boolean isFinish() {
+        return finish;
+    }
+
     public Player[] getPlayers() {
         return players;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public int getSelf() {
+        return self;
+    }
+
+    public void setSelf(int self) {
+        this.self = self;
+    }
+
+    public String getGameStatus() {
+        return gameStatus;
     }
 
     public void setPlayers(Player[] players) {
@@ -63,7 +89,8 @@ public class GameRepository {
         return board;
     }
 
-    public void process(int id) {
+    public String process(int id) {
+        String msg = "";
         if (!players[turn].isWanttoRemove()) {
             //means that I don't want to remove the piece of this house
             //Move method or Choose method?
@@ -72,6 +99,14 @@ public class GameRepository {
                 // Choose() method Actives
                 if (choose(players[turn], board.getHouses()[id])) {
                     //Choose() processing was Successful
+                    //TODO: Play put song
+                    Log.i("TAG", "What's the turn? " + turn);
+                    if (turn == 0){
+                        msg = "firstsong";
+                    }else {
+                        msg = "secondsong";
+                    }
+
                     Log.i("TAG", "Choose successful");
                     board.getHouses()[id].getImageView().setImageDrawable(players[turn].getDrawable());
                     if (!players[turn].isWanttoRemove()) {
@@ -91,7 +126,7 @@ public class GameRepository {
                 // Move() method Actives
                 /*In the first We must recognize Player Want to move this board's piece or want to put
                   here a piece that he caught earlier*/
-                Log.i("TAG", "move!");
+                Log.i("TAG", "move! and wants? " + players[turn].isWanttoMove(board.getHouses()[id]));
                 if (players[turn].isWanttoMove(board.getHouses()[id])) {
                     if (home != null) {
                         home.setDrawable(players[turn].getDrawable());
@@ -99,14 +134,25 @@ public class GameRepository {
                     Log.i("TAG", "HERE, Chosen one thing");
                     board.getHouses()[id].setDrawable(players[turn].getChosen_drawable());
                     home = board.getHouses()[id];
-
+                    //TODO: Play choose song
+                    players[0].playChooseSong();
+                    msg = "choosesong";
                 } else if (home != null) {
-                    //means that a piece chose and now Player wants to put it here
+                    //means that a piece choose and now Player wants to put it here
                     if (movePiece(players[turn], home, board.getHouses()[id])) {//Move() processed successful
-                        board.getHouses()[id].setDrawable(players[turn].getChosen_drawable());
-                        home.setImageView(null);
+                        board.getHouses()[id].setDrawable(players[turn].getDrawable());
+                        home.setDrawable(null);
                         home = null;
+                        //TODO: Play put song
+                        Log.i("TAG", "What's the turn? " + turn);
+                        if (turn == 0){
+                            msg = "firstsong";
+                        }else {
+                            msg = "secondsong";
+                        }
+
                         if (!players[turn].isWanttoRemove()) {//It's possible that after put piece, Dooz happened
+                            this.game.setStatus("یه مهره تکون بده");
                             if (turn == 0) {
                                 turn = 1;
                                 accessMove(players[1], players[0]);
@@ -117,8 +163,11 @@ public class GameRepository {
                                 Log.i("TAG", "Move! , turn:" + turn);
                             }
                         } else {
+                            this.game.setStatus("یه مهره حذف کن");
                             Log.i("TAG", "Delete! , turn:" + turn);
                         }
+                    } else {
+                        Log.i("TAG", "HEEYYY!");
                     }
                 }
             }
@@ -129,23 +178,24 @@ public class GameRepository {
                 if (turn == 0) {
                     turn = 1;
                     accessMove(players[1], players[0]);
-                    if (players[turn].pfree > 0){
+                    if (players[turn].pfree > 0) {
                         this.game.setStatus("یه مهره بذار");
-                    }else{
-                        this.game.setStatus("یه مهره حذف کن");
+                    } else {
+                        this.game.setStatus("یه مهره تکون بده");
                     }
                 } else {
                     turn = 0;
                     accessMove(players[0], players[1]);
-                    if (players[turn].pfree > 0){
+                    if (players[turn].pfree > 0) {
                         this.game.setStatus("یه مهره بذار");
-                    }else{
-                        this.game.setStatus("یه مهره حذف کن");
+                    } else {
+                        this.game.setStatus("یه مهره تکون بده");
                     }
                 }
                 Log.i("TAG", "Move! ,turn:" + turn);
             }
         }
+        return msg;
     }
 
     private boolean accessMove(Player player, Player opponent) {
@@ -212,7 +262,7 @@ public class GameRepository {
         return false;
     }
 
-    public boolean Ticfind(House b) {
+    private boolean Ticfind(House b) {
         checker();
         for (int i = 0; i < 4; i++) {
             barr2 = barr[i];
@@ -318,11 +368,7 @@ public class GameRepository {
     }
 
 
-    private boolean movePiece(Player player, House origin, House destination) {
-        //TODO: Add validation for move piece of this house to this des?
-        if (!choose(player, origin)) {
-            return false;
-        }
+    private boolean movePiece(Player player, House destination, House origin) {
         //We must check Accessibility condition for moving from h to b here
         if (!origin.isOccupied()) {
             for (int i = 0; i < 4; i++) {
@@ -338,7 +384,8 @@ public class GameRepository {
                                     destination.setOccupied(false);
                                     players[turn].getHouses().add(origin);
                                     origin.setTic(true);
-
+                                    origin.setOccupied(true);
+                                    origin.setOwner(players[turn]);
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
                                     }
@@ -353,8 +400,10 @@ public class GameRepository {
                                     players[turn].getHouses().remove(destination);
                                     destination.setTic(false);
                                     destination.setOwner(null);
-                                    destination.setOccupied(true);
+                                    destination.setOccupied(false);
                                     players[turn].getHouses().add(origin);
+                                    origin.setTic(true);
+                                    origin.setOccupied(true);
                                     origin.setOwner(players[turn]);
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
@@ -376,12 +425,14 @@ public class GameRepository {
                                     players[turn].getHouses().remove(destination);
                                     destination.setTic(false);
                                     destination.setOwner(null);
+                                    destination.setOccupied(false);
                                     players[turn].getHouses().add(origin);
+                                    origin.setTic(true);
+                                    origin.setOccupied(true);
                                     origin.setOwner(players[turn]);
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
                                     }
-
                                     return true;
                                 }
 
@@ -390,9 +441,12 @@ public class GameRepository {
                             try {
                                 if (barr2[k + 1][j] == origin) {
                                     players[turn].getHouses().remove(destination);
-                                    destination.setOwner(null);
                                     destination.setTic(false);
+                                    destination.setOwner(null);
+                                    destination.setOccupied(false);
                                     players[turn].getHouses().add(origin);
+                                    origin.setTic(true);
+                                    origin.setOccupied(true);
                                     origin.setOwner(players[turn]);
                                     if (Ticfind(origin)) {
                                         players[turn].setWanttoRemove(true);
@@ -430,29 +484,64 @@ public class GameRepository {
                     if (turn == 0) {
                         players[1].pnum--;
                         players[1].getHouses().remove(b);
-                        if (players[1].pfree > 0){
+                        if (players[1].pfree > 0) {
                             this.game.setStatus("یه مهره بذار");
-                        }else{
+                        } else {
                             this.game.setStatus("یه مهره تکون بده");
                         }
                     } else {
                         players[0].pnum--;
                         players[0].getHouses().remove(b);
-                        if (players[0].pfree > 0){
+                        if (players[0].pfree > 0) {
                             this.game.setStatus("یه مهره بذار");
-                        }else{
+                        } else {
                             this.game.setStatus("یه مهره تکون بده");
                         }
                     }
-
-//                    if (Gamecon(player, cp) == false) {
-//                        Log.i("TAG", "End game!");
-//                    }
+                    if (!gameCondition(players)) {
+                        this.finish = true;
+                        return false;
+                    }
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    private boolean gameCondition(Player[] player) {
+            if (player[0].pnum==2) {
+                //player[0] lost
+                //Put Scores into DB
+                //Sort and Put Top5 Names and Scores in TableController
+                putscore(player);
+                //backing data to earlier
+                if (0 == self){
+                    this.gameStatus = "lose";
+                }else{
+                    this.gameStatus = "win";
+                }
+                return false;
+            }
+            if (player[1].pnum==2) {
+                //player[1] lost
+                //Put Scores into DB
+                //Sort and Put Top5 Names and Scores in TableController
+                if (1 == self){
+                    this.gameStatus = "lose";
+                }else{
+                    this.gameStatus = "win";
+                }
+                putscore(player);
+                //
+
+                return false;
+            }
+
+            return true;
+    }
+
+    private void putscore(Player[] player) {
     }
 
     private boolean choose(Player player, House b) {
@@ -461,6 +550,9 @@ public class GameRepository {
             b.setOwner(players[turn]);
             player.getHouses().add(b);
             player.pfree--;
+            if (player.pfree <= 0){
+                this.game.setStatus("یه مهره تکون بده");
+            }
             if (Ticfind(b)) {
                 player.setWanttoRemove(true);
                 this.game.setStatus("یه مهره از حریف رو حذف کن");

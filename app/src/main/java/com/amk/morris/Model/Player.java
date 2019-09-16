@@ -1,10 +1,14 @@
 package com.amk.morris.Model;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.util.Log;
 
 import com.amk.morris.R;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -22,6 +26,7 @@ public class Player extends Person implements Serializable {
     private int score = 0;
     public int pfree = 12;
     public int pnum = 12;
+    private MediaPlayer firstSong, secondSong, chooseSong;
 
     public Player(Context context, Person person, int playerNumber) {
         super(person.getName());
@@ -30,6 +35,25 @@ public class Player extends Person implements Serializable {
         this.playerNumber = playerNumber;
         Piece playerPiece = new Piece();
         playerPiece.setOwner(this);
+        firstSong = new MediaPlayer();
+        secondSong = new MediaPlayer();
+        chooseSong = new MediaPlayer();
+        AssetFileDescriptor descriptor;
+        AssetFileDescriptor descriptor1;
+        AssetFileDescriptor descriptor2;
+        try {
+            descriptor = context.getAssets().openFd("p1.mp3");
+            firstSong.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+            descriptor.close();
+            descriptor1 = context.getAssets().openFd("p2.mp3");
+            secondSong.setDataSource(descriptor1.getFileDescriptor(), descriptor1.getStartOffset(), descriptor1.getLength());
+            descriptor1.close();
+            descriptor2 = context.getAssets().openFd("procc.mp3");
+            chooseSong.setDataSource(descriptor2.getFileDescriptor(), descriptor2.getStartOffset(), descriptor2.getLength());
+            descriptor2.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //TODO: Based on user chooses, assign piece
         if (playerNumber == 0) {
             playerPiece.setDrawable(context.getResources().getDrawable(R.drawable.whitemohre_min));
@@ -68,11 +92,43 @@ public class Player extends Person implements Serializable {
     }
 
     public boolean isWanttoMove(House house) {
-        return wanttoMove;
+        if (house.isOccupied()) {
+            return house.getOwner() == this;
+        }
+        return false;
     }
 
     public void setWanttoMove(boolean wanttoMove, House house) {
         this.wanttoMove = wanttoMove;
+    }
+
+    public void playFirstSong() {
+
+        try {
+            firstSong.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.i("TAG", "First song");
+        firstSong.start();
+    }
+
+    public void playSecondSong() {
+        try {
+            secondSong.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        secondSong.start();
+    }
+
+    public void playChooseSong() {
+        try {
+            chooseSong.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        chooseSong.start();
     }
 
     @Override
