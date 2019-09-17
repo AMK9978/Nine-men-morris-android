@@ -1,9 +1,6 @@
 package com.amk.morris;
 
-import android.app.Dialog;
-import android.media.MediaPlayer;
 import android.util.Log;
-import android.view.Window;
 
 import com.amk.morris.Model.Board;
 import com.amk.morris.Model.Game;

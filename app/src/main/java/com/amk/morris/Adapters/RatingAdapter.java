@@ -2,7 +2,6 @@ package com.amk.morris.Adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amk.morris.Model.Person;
 import com.amk.morris.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

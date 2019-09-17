@@ -1,18 +1,18 @@
 package com.amk.morris
 
-import android.content.Intent
-import android.media.Image
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
-import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupWithNavController
 import com.amk.morris.ui.contact_us.ContactFragment
 import com.amk.morris.ui.edit.EditFragment
 import com.amk.morris.ui.history.HistoryFragment
@@ -20,19 +20,9 @@ import com.amk.morris.ui.home.HomeFragment
 import com.amk.morris.ui.rating.RatingFragment
 import com.amk.morris.ui.settings.SettingsFragment
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.layout_profile.*
-import androidx.core.app.ShareCompat
 import com.google.firebase.analytics.FirebaseAnalytics
-import android.util.StatsLog.logEvent
-import android.os.Build
-import android.os.Environment
-import android.view.Gravity
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.layout_profile.*
 import java.io.File
 
 

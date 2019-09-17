@@ -3,13 +3,14 @@ package com.amk.morris
 import android.Manifest
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -18,11 +19,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.squareup.picasso.Picasso
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.Environment
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
 
 
 class SignActivity : AppCompatActivity() {

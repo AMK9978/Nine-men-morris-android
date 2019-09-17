@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="300dp"
     android:layout_marginBottom="8dp"
     android:background="@drawable/history_object_back"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="0dp"
         android:gravity="center"
         android:layout_weight="1"
@@ -18,7 +18,6 @@
         <Button
             android:id="@+id/status_txt"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:background="@drawable/fail_bg"
             android:fontFamily="@font/iran_sans_bold"
@@ -30,9 +29,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="center"
         android:layoutDirection="ltr"
         android:orientation="horizontal">
 
@@ -80,7 +82,7 @@
         android:drawablePadding="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/iran_sans_fanum"
         android:gravity="center_vertical"
         android:padding="8dp"

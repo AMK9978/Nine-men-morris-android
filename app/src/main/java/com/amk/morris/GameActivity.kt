@@ -1,13 +1,13 @@
 package com.amk.morris
 
-import android.app.Dialog
 import android.content.Intent
 import android.content.res.AssetFileDescriptor
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
@@ -351,27 +351,38 @@ class GameActivity : AppCompatActivity() {
         hint?.text = gameRepository.game.status
         Log.i("TAG", gameRepository.game.status)
         if (gameRepository.isFinish) {
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.finish_object)
+            val dialog = ReportDialog(this)
             dialog.setCancelable(false)
             dialog.show()
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             val finishBtn = dialog.findViewById<TextView>(R.id.confirm)
             val statusTxt = dialog.findViewById<Button>(R.id.status_txt)
             val selfName = dialog.findViewById<TextView>(R.id.self_name)
             val oppName = dialog.findViewById<TextView>(R.id.opponent_name)
             val opp = ++turn % 2
             when {
-                gameRepository.gameStatus == "win" -> statusTxt.text = "برد"
-                gameRepository.gameStatus == "lose" -> statusTxt.text = "باخت"
-                else -> statusTxt.text = "تساوی"
+                gameRepository.gameStatus == "win" ->{
+                    statusTxt.text = "برد"
+                    statusTxt.background = resources.getDrawable(R.drawable.success_bg)
+                }
+                gameRepository.gameStatus == "lose" -> {
+                    statusTxt.text = "باخت"
+                    statusTxt.background = resources.getDrawable(R.drawable.fail_bg)
+                }
+                else -> {
+                    statusTxt.text = "تساوی"
+                    statusTxt.background = resources.getDrawable(R.drawable.draw_bg)
+                }
             }
             selfName.text = gameRepository.players[turn].name
             oppName.text = gameRepository.players[opp].name
             val history = HistoryModel()
+            history.status = statusTxt.text.toString()
             history.self = gameRepository.players[turn]
-            history.self = gameRepository.players[opp]
+            history.opponent = gameRepository.players[opp]
             history.date = getCurrentDate()
+            //TODO: DB or server?
+
             finishBtn?.setOnClickListener {
                 dialog.dismiss()
                 val intent = Intent(this, ProfileActivity::class.java)
@@ -390,7 +401,7 @@ class GameActivity : AppCompatActivity() {
         hint?.text = text
     }
 
-    fun playFirstSong() {
+    private fun playFirstSong() {
 
         val firstSong = MediaPlayer()
         try {
@@ -411,7 +422,7 @@ class GameActivity : AppCompatActivity() {
         firstSong.start()
     }
 
-    fun playSecondSong() {
+    private fun playSecondSong() {
 
         val secondSong = MediaPlayer()
         try {
@@ -431,7 +442,7 @@ class GameActivity : AppCompatActivity() {
         secondSong.start()
     }
 
-    fun playChooseSong() {
+    private fun playChooseSong() {
 
         val chooseSong = MediaPlayer()
         try {

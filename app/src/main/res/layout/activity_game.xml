@@ -442,7 +442,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="60dp"
             android:layoutDirection="ltr"
             android:background="@drawable/game_controller_back"
             android:orientation="horizontal"

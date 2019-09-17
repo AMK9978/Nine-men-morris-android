@@ -106,7 +106,7 @@
                 android:drawableTop="@drawable/ic_show_chart_black_24dp"
                 android:fontFamily="@font/iran_sans_fanum"
                 android:padding="8dp"
-                android:text="ریتینگ"
+                android:text="رنکینگ"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
         </LinearLayout>
