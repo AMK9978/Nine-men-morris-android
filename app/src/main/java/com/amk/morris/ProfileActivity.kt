@@ -1,10 +1,12 @@
 package com.amk.morris
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.view.Menu
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.core.view.GravityCompat
@@ -42,6 +44,8 @@ class ProfileActivity : AppCompatActivity() {
         replaceFragment(fragment = HomeFragment())
         val view = navView2.getHeaderView(0)
         profileImage = view.findViewById(R.id.profile_image)
+        view.findViewById<TextView>(R.id.self_name).text =
+                getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "haji")
         loadProfileImage()
         navView2.setNavigationItemSelectedListener {
             when (it.itemId) {

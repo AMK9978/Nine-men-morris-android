@@ -361,7 +361,7 @@ class GameActivity : AppCompatActivity() {
             val oppName = dialog.findViewById<TextView>(R.id.opponent_name)
             val opp = ++turn % 2
             when {
-                gameRepository.gameStatus == "win" ->{
+                gameRepository.gameStatus == "win" -> {
                     statusTxt.text = "برد"
                     statusTxt.background = resources.getDrawable(R.drawable.success_bg)
                 }
@@ -462,4 +462,8 @@ class GameActivity : AppCompatActivity() {
         chooseSong.start()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

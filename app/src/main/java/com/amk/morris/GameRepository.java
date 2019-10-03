@@ -254,6 +254,7 @@ public class GameRepository {
         //means that current player has no neighbours that are non occupied
         player.setScore(1);
         opponent.setScore(1);
+        this.gameStatus = "draw";
         //So scores must be sent to DB
 //        put score(new Player[]{player, opponent});
         return false;
@@ -329,6 +330,7 @@ public class GameRepository {
                             barr2[j][0].setTic(true);
                             barr2[j][1].setTic(true);
                             barr2[j][2].setTic(true);
+                            Log.i("TAG", "Are hast:" + j);
                         }
                     }
                 }
@@ -340,6 +342,7 @@ public class GameRepository {
                             barr2[0][j].setTic(true);
                             barr2[1][j].setTic(true);
                             barr2[2][j].setTic(true);
+                            Log.i("TAG", "Are hast:" + j);
                         }
                     }
                 }

@@ -1,5 +1,6 @@
 package com.amk.morris.ui.edit
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,11 @@ class EditFragment : Fragment() {
         backBtn.setOnClickListener {
             fragmentManager?.popBackStack()
         }
+
+
+        val backImage = root.findViewById<ImageView>(R.id.imageView4)
+        ObjectAnimator.ofFloat(backImage, View.ROTATION, 0f, 360f).setDuration(60000).start()
+
 //        val textView: TextView = root.findViewById(R.id.text_slideshow)
         editViewModel.text.observe(this, Observer {
 //            textView.text = it

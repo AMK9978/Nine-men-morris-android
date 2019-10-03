@@ -44,10 +44,10 @@ class HomeFragment : Fragment() {
             //            textView.text = it
         })
 
-        val back_image = root.findViewById<ImageView>(R.id.back_image1)
-        ObjectAnimator.ofFloat(back_image, View.ROTATION, 0f, 360f).setDuration(60000).start()
-        val play_req = root.findViewById<Button>(R.id.play_request)
-        play_req.setOnClickListener {
+        val backImage = root.findViewById<ImageView>(R.id.back_image1)
+        ObjectAnimator.ofFloat(backImage, View.ROTATION, 0f, 360f).setDuration(60000).start()
+        val playReq = root.findViewById<Button>(R.id.play_request)
+        playReq.setOnClickListener {
             val dialog = context?.let { it1 -> Dialog(it1) }
             dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog?.setContentView(R.layout.game_options)
@@ -62,17 +62,18 @@ class HomeFragment : Fragment() {
                 dialog.dismiss()
                 val dialog2 = context?.let { it1 -> Dialog(it1) }
                 Handler().postDelayed({
-                    dialog2?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                    dialog2?.setContentView(R.layout.waiting_for_opponent)
-                    dialog2?.setCancelable(false)
-                    dialog2?.show()
+                    //TODO: Send request to the server for notice that current user is ready, wait until responds
+                    dialog2?.dismiss()
+                    val goto = Intent(this.context, GameActivity::class.java)
+                    goto.putExtra("type", "online")
+                    goto.putExtra("selfName", selfName)
+                    startActivity(goto)
                 }, 2000)
-                //TODO: Send request to the server for notice that current user is ready, wait until responds
-                dialog2?.dismiss()
-                val goto = Intent(this.context, GameActivity::class.java)
-                goto.putExtra("type", "online")
-                goto.putExtra("selfName", selfName)
-                startActivity(goto)
+
+                dialog2?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog2?.setContentView(R.layout.waiting_for_opponent)
+                dialog2?.setCancelable(false)
+                dialog2?.show()
             }
             aiGame?.setOnClickListener {
                 dialog.dismiss()
