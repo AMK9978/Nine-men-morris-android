@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -32,7 +33,7 @@ class HistoryFragment : Fragment() {
         })
         val recycler = root.findViewById<RecyclerView>(R.id.history_recycler)
         val historyList = arrayListOf<HistoryModel>()
-        var hmodel = HistoryModel()
+        val hmodel = HistoryModel()
         hmodel.date = "98/02/12"
         val self = Person("امیرمحمد کریمی")
         val opponent = Person("آرمان مظلوم زاده")
@@ -42,13 +43,13 @@ class HistoryFragment : Fragment() {
         hmodel.self = self
         hmodel.opponent = opponent
         historyList.add(hmodel)
-        var hmodel2 = HistoryModel()
+        val hmodel2 = HistoryModel()
         hmodel2.date = "98/02/12"
         hmodel2.self = self
         hmodel2.opponent = opponent
         hmodel2.status = "تساوی"
         historyList.add(hmodel2)
-        var hmodel3 = HistoryModel()
+        val hmodel3 = HistoryModel()
         hmodel3.date = "98/02/12"
         hmodel3.opponent = opponent
         hmodel3.self = self
@@ -61,6 +62,19 @@ class HistoryFragment : Fragment() {
         backBtn.setOnClickListener {
             fragmentManager?.popBackStack()
         }
+        val searchView = SearchView(context)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                adapter.filter.filter(query)
+                return false
+            }
+        })
         return root
     }
 

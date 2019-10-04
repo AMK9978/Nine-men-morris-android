@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +18,9 @@ import com.amk.morris.R;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Item> {
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Item> implements Filterable {
     private ArrayList<HistoryModel> historyModels;
+    private ArrayList<HistoryModel> filtered_historyModels;
     private Context context;
 
     public HistoryAdapter(ArrayList<HistoryModel> historyModels, Context context) {
@@ -34,12 +37,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Item> {
 
     @Override
     public int getItemCount() {
-        return historyModels.size();
+        return filtered_historyModels.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull Item holder, int position) {
-        HistoryModel historyModel = historyModels.get(position);
+        HistoryModel historyModel = filtered_historyModels.get(position);
         Person self = historyModel.getSelf();
         Person opponent = historyModel.getOpponent();
         holder.self_rating.setText(String.valueOf(self.getScore()));
@@ -48,13 +51,44 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Item> {
         holder.opponent_name.setText(opponent.getName());
         holder.status.setText(historyModel.getStatus());
         holder.date.setText(historyModel.getDate());
-        if (historyModel.getStatus().equals("برد")){
+        if (historyModel.getStatus().equals("برد")) {
             holder.status.setBackground(context.getResources().getDrawable(R.drawable.success_bg));
-        }else if (historyModel.getStatus().equals("تساوی")){
+        } else if (historyModel.getStatus().equals("تساوی")) {
             holder.status.setBackground(context.getResources().getDrawable(R.drawable.draw_bg));
-        }else{
+        } else {
             holder.status.setBackground(context.getResources().getDrawable(R.drawable.fail_bg));
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    filtered_historyModels = historyModels;
+                } else {
+                    ArrayList<HistoryModel> list = new ArrayList<>();
+                    for (HistoryModel model : historyModels) {
+                        if (model.getSelf().getName().toLowerCase().contains(charSequence)
+                                || String.valueOf(model.getDate()).contains(charSequence)) {
+                            list.add(model);
+                        }
+                    }
+                    filtered_historyModels = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filtered_historyModels;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filtered_historyModels = (ArrayList<HistoryModel>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     class Item extends RecyclerView.ViewHolder {

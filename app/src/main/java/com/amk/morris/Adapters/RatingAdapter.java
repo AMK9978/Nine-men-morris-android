@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,8 +21,9 @@ import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> {
+public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> implements Filterable {
     private ArrayList<Person> personArrayList;
+    private ArrayList<Person> filtered_personArrayList;
     private Context context;
     private int MyID;
 
@@ -41,25 +44,57 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> {
 
     @Override
     public int getItemCount() {
-        return personArrayList.size();
+        return filtered_personArrayList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull Item holder, int position) {
-        Person person = personArrayList.get(position);
+        Person person = filtered_personArrayList.get(position);
         holder.name.setText(person.getName());
         holder.selfRating.setText(String.valueOf(person.getScore()));
-        if (person.getId() == MyID){
+        if (person.getId() == MyID) {
             holder.ratingBack.setBackground(context.getResources().getDrawable(R.drawable.rating_me_object_back));
-        }else{
+        } else {
             holder.ratingBack.setBackground(context.getResources().getDrawable(R.drawable.history_object_back));
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    filtered_personArrayList = personArrayList;
+                } else {
+                    ArrayList<Person> list = new ArrayList<>();
+                    for (Person person : personArrayList) {
+                        if (person.getName().toLowerCase().contains(charSequence)
+                                || String.valueOf(person.getRank()).contains(charSequence)) {
+                            list.add(person);
+                        }
+                    }
+                    filtered_personArrayList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filtered_personArrayList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filtered_personArrayList = (ArrayList<Person>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     class Item extends RecyclerView.ViewHolder {
         ImageView profileImage;
         TextView name, selfRating;
         LinearLayout ratingBack;
+
         Item(@NonNull View itemView) {
             super(itemView);
             ratingBack = itemView.findViewById(R.id.rating_object_back);

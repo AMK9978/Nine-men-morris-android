@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -28,7 +29,7 @@ class RatingFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_rating, container, false)
 //        val textView: TextView = root.findViewById(R.id.)
         ratingViewModel.text.observe(this, Observer {
-//            textView.text = it
+            //            textView.text = it
         })
         val backBtn = root.findViewById<ImageView>(R.id.back_btn)
         backBtn.setOnClickListener {
@@ -52,6 +53,20 @@ class RatingFragment : Fragment() {
         val ratingAdapter = RatingAdapter(persons, context)
         ratingRecycler.adapter = ratingAdapter
         ratingRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        val searchView = SearchView(context)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                ratingAdapter.filter.filter(newText)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                ratingAdapter.filter.filter(query)
+                return false
+            }
+        })
         return root
     }
 }
