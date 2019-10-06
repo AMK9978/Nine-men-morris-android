@@ -38,7 +38,12 @@ public class Util extends AppCompatActivity {
         iranSans_ultra_light = getFont(getAssets(), "fonts/iran_sans_ultra_light.ttf");
         iranSans_bold = getFont(getAssets(), "fonts/iran_sans_bold.ttf");
         FirebaseApp.initializeApp(this);
-        Intent intent = new Intent(this, Login.class);
+        Intent intent;
+        if (sharedPreferences.getString("token", "nothing").equals("nothing")) {
+            intent = new Intent(this, Login.class);
+        }else{
+            intent = new Intent(this, ProfileActivity.class);
+        }
         startActivity(intent);
         finish();
     }

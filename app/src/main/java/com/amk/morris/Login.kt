@@ -3,11 +3,19 @@ package com.amk.morris
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.amk.morris.API.APIClient
+import com.amk.morris.API.APIInterface
+import com.amk.morris.Model.Person
+import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 @Suppress("UNUSED_PARAMETER")
@@ -15,6 +23,8 @@ class Login : AppCompatActivity() {
 
     private lateinit var emailTxt: EditText
     private lateinit var passTxt: EditText
+
+    val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +57,36 @@ class Login : AppCompatActivity() {
                 }
             }
         } else {
-            //TODO: Send info's to server and get callback
             val toMain = Intent(this, ProfileActivity::class.java)
-            startActivity(toMain)
+            val apiInterface = APIClient.getRetrofit().create(APIInterface::class.java)
+            val call = apiInterface.login(email, passTxt) as Call<Person>
+            call.enqueue(object : Callback<Person> {
+                override fun onFailure(call: Call<Person>, t: Throwable) {
+                    Log.i("TAG", t.message)
+                    alert.titleText = "مشکل!"
+                    alert.contentText = "مشکلی در وارد کردن نام کاربری و رمز عبور هست!"
+                    alert.confirmText = "باشه"
+                    alert.show()
+                    alert.setConfirmClickListener {
+                        alert.dismiss()
+                    }
+                    emailTxt.text.clear()
+                    pass_txt.text.clear()
+                    return
+                }
+
+                override fun onResponse(call: Call<Person>, response: Response<Person>) {
+                    if (response.isSuccessful){
+                        val person = response.body()
+                        toMain.putExtra("person", person)
+                        startActivity(toMain)
+                    }else{
+                        emailTxt.text.clear()
+                        pass_txt.text.clear()
+                        return
+                    }
+                }
+            })
         }
     }
 

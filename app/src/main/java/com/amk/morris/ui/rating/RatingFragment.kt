@@ -1,6 +1,7 @@
 package com.amk.morris.ui.rating
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amk.morris.API.APIClient
+import com.amk.morris.API.APIInterface
 import com.amk.morris.Adapters.RatingAdapter
 import com.amk.morris.Model.Person
 import com.amk.morris.R
+import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RatingFragment : Fragment() {
-
+    private var persons = arrayListOf<Person>()
     private lateinit var ratingViewModel: RatingViewModel
 
     override fun onCreateView(
@@ -40,16 +47,20 @@ class RatingFragment : Fragment() {
 
         }
         val ratingRecycler = root.findViewById(R.id.rating_recycler) as RecyclerView
-        val persons = arrayListOf<Person>()
-        val person = Person("اکبر ترینم")
-        person.score = 1202
-        person.id = 1
-        val person2 = Person("امیر ترینم")
-        person2.score = 1402
-        person2.id = 2
+        val apiInterface = APIClient.getRetrofit().create(APIInterface::class.java)
+        val call = apiInterface.ranking() as Call<List<Person>>
+        call.enqueue(object : Callback<List<Person>> {
+            override fun onFailure(call: Call<List<Person>>, t: Throwable) {
+                Log.i("TAG", t.message)
+            }
 
-        persons.add(person)
-        persons.add(person2)
+            override fun onResponse(call: Call<List<Person>>, response: Response<List<Person>>) {
+                if (response.isSuccessful){
+                    persons = response.body() as ArrayList<Person>
+                }
+            }
+
+        })
         val ratingAdapter = RatingAdapter(persons, context)
         ratingRecycler.adapter = ratingAdapter
         ratingRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

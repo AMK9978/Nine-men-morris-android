@@ -13,10 +13,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.amk.morris.API.APIClient
+import com.amk.morris.API.APIInterface
 import com.amk.morris.Model.HistoryModel
 import com.amk.morris.Model.Person
 import com.amk.morris.Model.Player
 import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.IOException
 
@@ -74,8 +79,19 @@ class GameActivity : AppCompatActivity() {
         val selfName = intent.getStringExtra("selfName")
         val oppName = intent.getStringExtra("oppName")
         val type = intent.getStringExtra("type")
-        //TODO: turn should be received from server
+        val apiInterface = APIClient.getRetrofit().create(APIInterface::class.java)
+        val call = apiInterface.turn as Call<Int>
+        call.enqueue(object : Callback<Int> {
+            override fun onFailure(call: Call<Int>, t: Throwable) {
 
+            }
+
+            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                if (response.isSuccessful){
+                    turn = response.body()!!
+                }
+            }
+        })
         hint = findViewById(R.id.hint_txt)
         opp_pfree = findViewById(R.id.opp_pfree_txt)
         self_pfree = findViewById(R.id.self_pfree_txt)

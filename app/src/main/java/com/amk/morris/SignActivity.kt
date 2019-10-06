@@ -18,7 +18,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.amk.morris.API.APIClient
+import com.amk.morris.API.APIInterface
+import com.amk.morris.Model.Person
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 
@@ -56,17 +63,39 @@ class SignActivity : AppCompatActivity() {
                 alert.dismiss()
             }
         } else {
-            //TODO: Send info's to the server and get callback
-            saveImageToInternalStorage(profileImage!!.drawable)
-            val editor = Util.sharedPreferences.edit()
-            editor.putString("name", name)
-            editor.putString("email", email)
-            editor.apply()
-            val selfName = getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "haji") as String
-            Log.i("TAG", "NAME: $selfName, $name")
             val toMain = Intent(this, ProfileActivity::class.java)
-            startActivity(toMain)
-            finish()
+            val apiInterface = APIClient.getRetrofit().create(APIInterface::class.java)
+            val call = apiInterface.signUp(name, email, pass) as Call<Person>
+            call.enqueue(object : Callback<Person> {
+                override fun onFailure(call: Call<Person>, t: Throwable) {
+                    Log.i("TAG", t.message)
+                    name_txt!!.text.clear()
+                    email_txt!!.text.clear()
+                    pass_txt!!.text.clear()
+                    return
+                }
+
+                override fun onResponse(call: Call<Person>, response: Response<Person>) {
+                    if (response.isSuccessful){
+                        saveImageToInternalStorage(profileImage!!.drawable)
+                        val editor = Util.sharedPreferences.edit()
+                        editor.putString("name", name)
+                        editor.putString("email", email)
+                        editor.apply()
+                        val selfName = getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "haji") as String
+                        Log.i("TAG", "NAME: $selfName, $name")
+                        val person = response.body()
+                        toMain.putExtra("person", person)
+                        startActivity(toMain)
+                        finish()
+                    }else{
+                        name_txt?.text?.clear()
+                        email_txt?.text?.clear()
+                        pass_txt?.text?.clear()
+                        return
+                    }
+                }
+            })
         }
     }
 
