@@ -51,12 +51,13 @@ class RatingFragment : Fragment() {
         val call = apiInterface.ranking() as Call<List<Person>>
         call.enqueue(object : Callback<List<Person>> {
             override fun onFailure(call: Call<List<Person>>, t: Throwable) {
-                Log.i("TAG", t.message)
+                t.stackTrace
             }
 
             override fun onResponse(call: Call<List<Person>>, response: Response<List<Person>>) {
                 if (response.isSuccessful){
                     persons = response.body() as ArrayList<Person>
+                    Log.i("TAG", persons.toString())
                 }
             }
 

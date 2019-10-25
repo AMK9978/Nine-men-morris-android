@@ -65,10 +65,11 @@ class SignActivity : AppCompatActivity() {
         } else {
             val toMain = Intent(this, ProfileActivity::class.java)
             val apiInterface = APIClient.getRetrofit().create(APIInterface::class.java)
+            Log.i("TAG", "$name , $email , $pass")
             val call = apiInterface.signUp(name, email, pass) as Call<Person>
             call.enqueue(object : Callback<Person> {
                 override fun onFailure(call: Call<Person>, t: Throwable) {
-                    Log.i("TAG", t.message)
+                    Log.i("TAGGG", t.toString())
                     name_txt!!.text.clear()
                     email_txt!!.text.clear()
                     pass_txt!!.text.clear()
@@ -89,6 +90,7 @@ class SignActivity : AppCompatActivity() {
                         startActivity(toMain)
                         finish()
                     }else{
+                        Log.i("TAG", response.message())
                         name_txt?.text?.clear()
                         email_txt?.text?.clear()
                         pass_txt?.text?.clear()

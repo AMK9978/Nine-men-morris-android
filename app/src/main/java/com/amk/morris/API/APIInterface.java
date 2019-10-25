@@ -33,8 +33,7 @@ public interface APIInterface {
 
     @POST("signup")
     @FormUrlEncoded
-    Call<Person> signUp(@Field("username") String username, @Field("password") String password,
-                        @Field("email") String email);
+    Call<Person> signUp(@Field("username") String username, @Field("email") String email, @Field("password") String password);
 
     @POST("login")
     @FormUrlEncoded

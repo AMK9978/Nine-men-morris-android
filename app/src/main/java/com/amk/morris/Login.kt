@@ -24,11 +24,12 @@ class Login : AppCompatActivity() {
     private lateinit var emailTxt: EditText
     private lateinit var passTxt: EditText
 
-    val alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+    var alert : SweetAlertDialog ?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        alert = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
         emailTxt = findViewById(R.id.email_txt)
         passTxt = findViewById(R.id.pass_txt)
         val backgroundImage = findViewById<ImageView>(R.id.back_image)
@@ -62,13 +63,13 @@ class Login : AppCompatActivity() {
             val call = apiInterface.login(email, passTxt) as Call<Person>
             call.enqueue(object : Callback<Person> {
                 override fun onFailure(call: Call<Person>, t: Throwable) {
-                    Log.i("TAG", t.message)
-                    alert.titleText = "مشکل!"
-                    alert.contentText = "مشکلی در وارد کردن نام کاربری و رمز عبور هست!"
-                    alert.confirmText = "باشه"
-                    alert.show()
-                    alert.setConfirmClickListener {
-                        alert.dismiss()
+//                    Log.i("TAG", )
+                    alert!!.titleText = "مشکل!"
+                    alert!!.contentText = "مشکلی در وارد کردن نام کاربری و رمز عبور هست!"
+                    alert!!.confirmText = "باشه"
+                    alert!!.show()
+                    alert!!.setConfirmClickListener {
+                        alert!!.dismiss()
                     }
                     emailTxt.text.clear()
                     pass_txt.text.clear()
@@ -76,6 +77,7 @@ class Login : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<Person>, response: Response<Person>) {
+                    Log.i("TAG", response.toString())
                     if (response.isSuccessful){
                         val person = response.body()
                         toMain.putExtra("person", person)

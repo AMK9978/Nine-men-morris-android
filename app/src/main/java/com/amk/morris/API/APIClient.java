@@ -1,11 +1,12 @@
 package com.amk.morris.API;
 
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
-    private static Retrofit retrofit;
-    private static final String BASE_URL = "http://192.168.43.93:3000";
+    private static Retrofit retrofit = null;
+    private static final String BASE_URL = "http://morrisfa.eu-4.evennode.com";
 
     public static Retrofit getRetrofit() {
         if (retrofit == null) {

@@ -22,8 +22,13 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
+import java.io.InputStreamReader
+import java.net.InetSocketAddress
+import java.net.Socket
+import kotlin.concurrent.thread
 
 class GameActivity : AppCompatActivity() {
 
@@ -34,6 +39,7 @@ class GameActivity : AppCompatActivity() {
     var self_profile: ImageView? = null
     var opponent_profile: ImageView? = null
     var turn: Int = 0
+    private var socket: Socket? = null
     private var btn0: ImageView? = null
     private var btn1: ImageView? = null
     private var btn2: ImageView? = null
@@ -60,6 +66,8 @@ class GameActivity : AppCompatActivity() {
     private var btn23: ImageView? = null
     private var self_pfree: TextView? = null
     private var opp_pfree: TextView? = null
+    private val sendMessageThread : Thread ? = null
+    private val getMessageThread : Thread ? = null
 
     private fun loadProfileImage() {
         val mainFile = File(Environment.getExternalStorageDirectory(), "Morris/profileImage.jpg")
@@ -87,8 +95,9 @@ class GameActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     turn = response.body()!!
+                    runSocket()
                 }
             }
         })
@@ -359,12 +368,67 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
+    private fun runSocket() {
+        thread(start = true) {
+            val address = InetSocketAddress("morrisfa.eu-4.evennode.com", 80)
+            socket!!.connect(address)
+        }
+
+
+    }
+
+
+    private fun getMessage(message: String) {
+        try {
+            socket.use {
+                var responseString: String? = null
+
+                it?.getOutputStream()?.write(message.toByteArray())
+                val bufferReader = BufferedReader(InputStreamReader(it!!.inputStream))
+                while (true) {
+                    val line = bufferReader.readLine() ?: break
+                    responseString += line
+                    if (line == "exit")
+                        break
+                }
+                println("Received: $responseString")
+                bufferReader.close()
+                it.close()
+            }
+        } catch (he: java.lang.Exception) {
+            Log.i("TAG", he.message)
+        }
+    }
+
+    private fun sendMessage(message: String) {
+        try {
+            socket.use {
+                var responseString: String? = null
+
+                it?.getOutputStream()?.write(message.toByteArray())
+                val bufferReader = BufferedReader(InputStreamReader(it!!.inputStream))
+                while (true) {
+                    val line = bufferReader.readLine() ?: break
+                    responseString += line
+                    if (line == "exit")
+                        break
+                }
+                println("Received: $responseString")
+                bufferReader.close()
+                it.close()
+            }
+        } catch (he: java.lang.Exception) {
+            Log.i("TAG", he.message)
+        }
+    }
+
     private fun updatePfrees(gameRepository: GameRepository) {
 
 
         opp_pfree?.text = gameRepository.players[1].pfree.toString()
         self_pfree?.text = gameRepository.players[0].pfree.toString()
         hint?.text = gameRepository.game.status
+
         Log.i("TAG", gameRepository.game.status)
         if (gameRepository.isFinish) {
             val dialog = ReportDialog(this)

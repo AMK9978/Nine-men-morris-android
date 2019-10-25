@@ -1,9 +1,11 @@
 package com.amk.morris.ui.home
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
@@ -21,16 +23,27 @@ import androidx.lifecycle.ViewModelProviders
 import com.amk.morris.GameActivity
 import com.amk.morris.Login
 import com.amk.morris.R
+import com.amk.morris.SocketAct
 import com.amk.morris.ui.edit.EditFragment
 import com.amk.morris.ui.history.HistoryFragment
 import com.amk.morris.ui.rating.RatingFragment
 import com.amk.morris.ui.settings.SettingsFragment
+import com.github.nkzawa.socketio.client.IO
 import com.squareup.picasso.Picasso
-import java.io.File
+import java.io.*
+import java.net.ServerSocket
+import java.net.Socket
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
+    private var socket: Socket? = null
+    private var a = 0
+    private var end = false
+    private var sendMessageThread: Thread? = null
+    private var getMessageThread: Thread? = null
+    private var dialog: Dialog? = null
+    private var dialog2: Dialog? = null
     private var profileImage: ImageView? = null
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -48,7 +61,7 @@ class HomeFragment : Fragment() {
         ObjectAnimator.ofFloat(backImage, View.ROTATION, 0f, 360f).setDuration(60000).start()
         val playReq = root.findViewById<Button>(R.id.play_request)
         playReq.setOnClickListener {
-            val dialog = context?.let { it1 -> Dialog(it1) }
+            dialog = context?.let { it1 -> Dialog(it1) }
             dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog?.setContentView(R.layout.game_options)
             dialog?.setCancelable(true)
@@ -59,24 +72,37 @@ class HomeFragment : Fragment() {
             val selfName = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "من!") as String
             Log.i("TAG", "NAME: $selfName")
             onlineGame?.setOnClickListener {
-                dialog.dismiss()
-                val dialog2 = context?.let { it1 -> Dialog(it1) }
-                Handler().postDelayed({
-                    //TODO: Send request to the server for notice that current user is ready, wait until responds
-                    dialog2?.dismiss()
-                    val goto = Intent(this.context, GameActivity::class.java)
-                    goto.putExtra("type", "online")
-                    goto.putExtra("selfName", selfName)
-                    startActivity(goto)
-                }, 2000)
+                dialog?.dismiss()
+//                dialog2 = context?.let { it1 -> Dialog(it1) }
+//                dialog2?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//                dialog2?.setContentView(R.layout.waiting_for_opponent)
+//                dialog2?.setCancelable(false)
+//                dialog2?.show()
+//                runSocket()
 
-                dialog2?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog2?.setContentView(R.layout.waiting_for_opponent)
-                dialog2?.setCancelable(false)
-                dialog2?.show()
+//                sendMessage("haji")
+                val ii = Intent(context, SocketAct::class.java);
+                startActivity(ii)
+
+//                Handler().postDelayed({
+//                    //TODO: Send request to the server for notice that current user is ready, wait until responds
+//                    dialog2?.dismiss()
+//                    val goto = Intent(this.context, GameActivity::class.java)
+//                    goto.putExtra("type", "online")
+//                    goto.putExtra("selfName", selfName)
+//                    startActivity(goto)
+//                }, 2000)
+
+//                Handler().postDelayed({
+//                    dialog2?.dismiss()
+//                },4000)
+//                dialog2?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//                dialog2?.setContentView(R.layout.waiting_for_opponent)
+//                dialog2?.setCancelable(false)
+//                dialog2?.show()
             }
             aiGame?.setOnClickListener {
-                dialog.dismiss()
+                dialog?.dismiss()
                 val goto = Intent(activity, GameActivity::class.java)
                 goto.putExtra("type", "ai")
                 goto.putExtra("selfName", selfName)
@@ -84,7 +110,7 @@ class HomeFragment : Fragment() {
             }
 
             selfGame?.setOnClickListener {
-                dialog.dismiss()
+                dialog?.dismiss()
                 val goto = Intent(activity, GameActivity::class.java)
                 goto.putExtra("type", "self")
                 goto.putExtra("selfName", selfName)
@@ -92,6 +118,16 @@ class HomeFragment : Fragment() {
                 startActivity(goto)
             }
 
+        }
+        if (a == 1) {
+//            dialog?.dismiss()
+
+            val selfName = activity?.getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "من!") as String
+            val goto = Intent(this.context, GameActivity::class.java)
+            goto.putExtra("type", "online")
+            goto.putExtra("selfName", selfName)
+            startActivity(goto)
+            activity!!.finish()
         }
         val rating = root.findViewById<Button>(R.id.rating_btn)
         val edit = root.findViewById<Button>(R.id.edit_btn)
@@ -123,12 +159,134 @@ class HomeFragment : Fragment() {
     }
 
 
+    private fun startServerSocket() {
+        val thread = Thread(object : Runnable {
+            private var stringData: String? = null
+            override fun run() {
+                try {
+                    val ss = ServerSocket(9002)
+                    while (!end) {
+                        //Server is waiting for client here, if needed
+                        val s = ss.accept()
+                        val input = BufferedReader(InputStreamReader(s.getInputStream()))
+                        val output = PrintWriter(s.getOutputStream())
+                        stringData = input.readLine()
+                        output.println("FROM SERVER - " + stringData!!.toUpperCase())
+                        output.flush()
+
+                        try {
+                            Thread.sleep(1000)
+                        } catch (e: InterruptedException) {
+                            e.printStackTrace()
+                        }
+
+                        updateUI(stringData)
+                        if (stringData!!.equals("STOP", ignoreCase = true)) {
+                            end = true
+                            output.close()
+                            s.close()
+                            break
+                        }
+
+                        output.close()
+                        s.close()
+                    }
+                    ss.close()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+            }
+
+        })
+        thread.start()
+    }
+
+    private fun updateUI(stringData: String?) {
+        val handler = Handler()
+        handler.post {
+            val s = "akbaram"
+            if (stringData!!.trim { it <= ' ' }.isNotEmpty())
+                Log.i("TAG", "$s\nFrom Client : $stringData")
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    inner class Async : AsyncTask<Unit, Unit, Unit>() {
+        override fun doInBackground(vararg p0: Unit?) {
+            Log.i("TAG", "In thread")
+
+        }
+    }
+
+    private fun sendMessage(message: String) {
+
+        val handler = Handler()
+        val thread = Thread(Runnable {
+            try {
+                //Replace below IP with the IP of that device in which server socket open.
+                //If you change port then change the port number in the server side code also.
+                val s = Socket("xxx.xxx.xxx.xxx", 9002)
+                val out = s.getOutputStream()
+                val output = PrintWriter(out)
+                output.flush()
+                val input = BufferedReader(InputStreamReader(s.getInputStream()))
+                val st = input.readLine()
+
+                handler.post {
+                    if (st.trim { it <= ' ' }.isNotEmpty()) {
+                        Log.i("TAG", st)
+                    }
+                }
+
+                output.close()
+                out.close()
+                s.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        })
+        thread.start()
+    }
+
+    private fun runSocket() {
+        Log.i("TAG", "in runSocket")
+        Async().execute()
+    }
+
     private fun replaceFragment(fragment: Fragment) {
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.replace(R.id.nav_host_fragment, fragment)
         transaction?.addToBackStack(null)
         transaction?.commit()
     }
+
+    private fun getMessage() {
+        try {
+            socket.use {
+                var responseString: String? = null
+                val bufferReader = BufferedReader(InputStreamReader(it!!.inputStream))
+                Log.i("TAG", "Inja1")
+                while (true) {
+                    Log.i("TAG", "in while")
+                    val line = bufferReader.readLine() ?: break
+                    responseString += line
+                    // oppname, opId , playerNumber
+                    Log.i("TAG", line)
+                    if (line == "exit") {
+                        break
+                    }
+                }
+                println("Received: $responseString")
+                a = 1
+            }
+        } catch (he: java.lang.Exception) {
+            Log.i("TAG", "Error!")
+            Log.i("TAG", he.message)
+            he.printStackTrace()
+        }
+    }
+
 
     private fun loadProfileImage() {
         val mainFile = File(Environment.getExternalStorageDirectory(), "Morris/profileImage.jpg")

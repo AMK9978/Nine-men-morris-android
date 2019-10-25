@@ -31,7 +31,7 @@ class HistoryFragment : Fragment() {
         historyViewModel.text.observe(this, Observer {
 
         })
-        val recycler = root.findViewById<RecyclerView>(R.id.history_recycler)
+        val recycler = root.findViewById(R.id.history_recycler) as RecyclerView
         val historyList = arrayListOf<HistoryModel>()
         val hmodel = HistoryModel()
         hmodel.date = "98/02/12"

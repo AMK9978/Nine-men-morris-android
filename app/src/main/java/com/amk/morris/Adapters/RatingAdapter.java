@@ -23,7 +23,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> implements Filterable {
     private ArrayList<Person> personArrayList;
-    private ArrayList<Person> filtered_personArrayList;
+    private ArrayList<Person> filtered_personArrayList = new ArrayList<>();
     private Context context;
     private int MyID;
 
@@ -33,6 +33,7 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> impl
         SharedPreferences sharedPreferences = context.getSharedPreferences("pref", MODE_PRIVATE);
         MyID = sharedPreferences.getInt("MyID", -1);
         MyID = 1;
+
     }
 
     @NonNull
@@ -44,7 +45,7 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> impl
 
     @Override
     public int getItemCount() {
-        return filtered_personArrayList.size();
+        return personArrayList.size();
     }
 
     @Override
