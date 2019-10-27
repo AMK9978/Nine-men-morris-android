@@ -3,7 +3,6 @@ package com.amk.morris
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.amk.morris.API.APIClient
 import com.amk.morris.API.APIInterface
-import com.amk.morris.Model.Person
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

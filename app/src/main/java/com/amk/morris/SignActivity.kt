@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -21,8 +22,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.amk.morris.API.APIClient
 import com.amk.morris.API.APIInterface
 import com.amk.morris.Model.Person
+import com.cloudinary.Cloudinary
+import com.cloudinary.android.MediaManager
+import com.cloudinary.utils.ObjectUtils
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,8 +38,10 @@ class SignActivity : AppCompatActivity() {
     private val galleryReqCode: Int = 100
     private val permissionCode: Int = 101
     private var profileImage: ImageView? = null
+    private var imageUri: Uri? = null
     private var email_txt: EditText? = null
     private var pass_txt: EditText? = null
+    private var mypathfile: File? = null
     private var name_txt: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,20 +82,47 @@ class SignActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<Person>, response: Response<Person>) {
-                    if (response.isSuccessful){
+                    if (response.isSuccessful) {
                         saveImageToInternalStorage(profileImage!!.drawable)
                         val editor = Util.sharedPreferences.edit()
                         editor.putString("name", name)
                         editor.putString("email", email)
+//                        editor.putString("token", )
+                        Log.i("TAGd", response.message())
                         editor.apply()
                         val selfName = getSharedPreferences("pref", Context.MODE_PRIVATE)!!.getString("name", "haji") as String
                         Log.i("TAG", "NAME: $selfName, $name")
                         val person = response.body()
-                        toMain.putExtra("person", person)
+                        MediaManager.init(applicationContext)
+
+                        val cloud = Cloudinary()
+                        cloud.config.cloudName = "dwed1jllc"
+                        cloud.config.apiKey = "515624692796587"
+                        cloud.config.apiSecret = "qBmRXLABBkmLWiMBhorIpkhXluM"
+                        val tt = Thread(Runnable {
+                            cloud.uploader().upload(mypathfile,   ObjectUtils.asMap(
+                                    "folder", "$name/",
+                                    "public_id", "profileImage"))
+                        }).start()
+
+                        // sample : https://res.cloudinary.com/dwed1jllc/image/upload/profileImage.jpg
+                        val url = "https://res.cloudinary.com/dwed1jllc/image/upload/غلامprofileImage.jpg"
+//                        val call2 = apiInterface.imageUpload(url) as Call<String>
+//                        call2.enqueue(object : Callback<String> {
+//                            override fun onFailure(call: Call<String>, t: Throwable) {
+//
+//                            }
+//
+//                            override fun onResponse(call: Call<String>, response: Response<String>) {
+//
+//                            }
+//                        })
+
+                        toMain.putExtra("persoTAn", person)
                         startActivity(toMain)
                         finish()
-                    }else{
-                        Log.i("TAG", response.message())
+                    } else {
+                        Log.i("TAG", response.message() + " " + response.code())
                         name_txt?.text?.clear()
                         email_txt?.text?.clear()
                         pass_txt?.text?.clear()
@@ -109,7 +141,7 @@ class SignActivity : AppCompatActivity() {
             f.mkdirs()
         }
         val mypath = "profileImage.jpg"
-        val mypathfile = File(f.absolutePath + "/" + mypath)
+        mypathfile = File(f.absolutePath + "/" + mypath)
         val fos = FileOutputStream(mypathfile)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
     }
@@ -118,6 +150,7 @@ class SignActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100) {
             Log.i("TAG", data?.data.toString())
+            imageUri = data?.data
             Picasso.get().load(data?.data).fit().placeholder(R.drawable.ic_person_outline_black_24dp).into(profileImage)
         }
     }

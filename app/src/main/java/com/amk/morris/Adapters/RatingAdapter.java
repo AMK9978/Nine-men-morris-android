@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amk.morris.Model.Person;
 import com.amk.morris.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -58,6 +60,7 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> impl
         } else {
             holder.ratingBack.setBackground(context.getResources().getDrawable(R.drawable.history_object_back));
         }
+        Picasso.get().load(person.getFile_path()).fit().into(holder.profileImage);
     }
 
     @Override
@@ -92,14 +95,14 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.Item> impl
     }
 
     class Item extends RecyclerView.ViewHolder {
-        ImageView profileImage;
+        CircleImageView profileImage;
         TextView name, selfRating;
         LinearLayout ratingBack;
 
         Item(@NonNull View itemView) {
             super(itemView);
             ratingBack = itemView.findViewById(R.id.rating_object_back);
-            profileImage = itemView.findViewById(R.id.profile_image);
+            profileImage = itemView.findViewById(R.id.avatar);
             name = itemView.findViewById(R.id.self_name);
             selfRating = itemView.findViewById(R.id.self_rating);
         }

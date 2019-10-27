@@ -35,6 +35,10 @@ public interface APIInterface {
     @FormUrlEncoded
     Call<Person> signUp(@Field("username") String username, @Field("email") String email, @Field("password") String password);
 
+    @POST("imageurl")
+    @FormUrlEncoded
+    Call<String> imageUpload(@Field("url") String url);
+
     @POST("login")
     @FormUrlEncoded
     Call<Person> login(@Field("username") String username,

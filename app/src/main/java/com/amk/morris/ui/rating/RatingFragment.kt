@@ -17,7 +17,6 @@ import com.amk.morris.API.APIInterface
 import com.amk.morris.Adapters.RatingAdapter
 import com.amk.morris.Model.Person
 import com.amk.morris.R
-import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

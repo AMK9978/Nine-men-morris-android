@@ -91,9 +91,7 @@ class GameActivity : AppCompatActivity() {
         val call = apiInterface.turn as Call<Int>
         call.enqueue(object : Callback<Int> {
             override fun onFailure(call: Call<Int>, t: Throwable) {
-
             }
-
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 if (response.isSuccessful) {
                     turn = response.body()!!
